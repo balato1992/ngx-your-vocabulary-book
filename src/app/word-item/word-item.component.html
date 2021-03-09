@@ -1,0 +1,15 @@
+<!--{{vItem.sentence}}-->
+<td *ngIf="wordForView.highlightTexts" class="text-width">
+    <span *ngFor="let ht of wordForView.highlightTexts; let i = index" attr.index="{{i}}"
+        [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
+</td>
+<td class="float-menu">
+    
+    <button mat-icon-button color="primary" (click)="highlightItem()">
+        <mat-icon>highlight</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+    </button>
+    <app-menu-button (deleteEvent)="delete()"></app-menu-button>
+</td>

@@ -1,0 +1,25 @@
+<div style="background: #673ab7;">
+    <h1 style="color: #fff; font-weight: 300; margin: 0; padding: 28px 8px; font-size: 20px;">Get start</h1>
+</div>
+<div style="max-width: 940px; margin: 0 auto;">
+    <mat-card>
+        <mat-form-field>
+            <mat-label>Sentence</mat-label>
+            <input matInput [(ngModel)]="sentence">
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)="addItem()">Add</button>
+
+        <table>
+            <tr app-word-tr *ngFor="let wfv of wordForViews; let i = index"
+                [class]="(i==currentHoverIndex)?'hover-tr':''" style="display: flex;"
+                [style.background-color]="(i%2)?'':'#eee'" [wordForView]="wfv" (deleteEvent)="deleteItem($event)"
+                (highlightEvent)="highlightItem($event)" (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
+            </tr>
+        </table>
+
+        <br>
+        <br>
+        <br>
+        <button mat-flat-button color="primary" (click)="clearItem()">Clear</button>
+    </mat-card>
+</div>

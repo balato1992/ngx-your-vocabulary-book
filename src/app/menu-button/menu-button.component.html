@@ -1,0 +1,9 @@
+<button mat-mini-fab color="primary" [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu>
+    <button mat-menu-item (click)="delete()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+    </button>
+</mat-menu>
