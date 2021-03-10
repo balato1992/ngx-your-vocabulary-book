@@ -3,7 +3,7 @@ import { HighlightText } from './highlight-text';
 
 export class Word {
     uid: string = "";
-    private sentence: string = "";
+    sentence: string = "";
     private highlights: Highlight[] = [];
 
     constructor(sentence: string = "") {

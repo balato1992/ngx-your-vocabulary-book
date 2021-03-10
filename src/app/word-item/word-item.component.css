@@ -2,3 +2,7 @@ td.text-width {
     min-width: 0;
     width: 100%;
 }
+
+td.margin-custom {
+    margin: auto 8px;
+}

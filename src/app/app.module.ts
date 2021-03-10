@@ -9,11 +9,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { WordItemComponent } from './word-item/word-item.component';
 import { MenuButtonComponent } from './menu-button/menu-button.component';
+import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { MenuButtonComponent } from './menu-button/menu-button.component';
     AppComponent,
     MainComponent,
     WordItemComponent,
-    MenuButtonComponent
+    MenuButtonComponent,
+    YesNoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { MenuButtonComponent } from './menu-button/menu-button.component';
     MatIconModule,
     MatCardModule,
     MatListModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

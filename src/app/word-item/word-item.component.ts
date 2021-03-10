@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { WordForView } from '../class/word-for-view';
+import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog/yes-no-dialog.component';
 
 @Component({
   selector: '[app-word-tr]',
@@ -13,14 +15,25 @@ export class WordItemComponent implements OnInit {
   @Output() highlightEvent = new EventEmitter<{ uid: string, start: number, end: number }>();
   currentRange: Range | undefined = undefined;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
   }
 
   delete() {
-    this.deleteEvent.emit(this.wordForView.word.uid);
+    const text = "Delete '" + this.wordForView.word.sentence + "'?"
+
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      width: '250px',
+      data: new YesNoDialogComponentData('Confirm Deletion', text)
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteEvent.emit(this.wordForView.word.uid);
+      }
+    });
   }
   highlightItem() {
     let selection = window.getSelection();
@@ -66,10 +79,5 @@ export class WordItemComponent implements OnInit {
         selection.removeAllRanges();
       }
     }
-  }
-
-  mouseEnter() {
-  }
-  mouseLeave() {
   }
 }
