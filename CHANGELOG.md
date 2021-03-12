@@ -1,11 +1,13 @@
 
 # TODO
 
+- google text speech
+- language
+- multipage for different variety of sentence
 - beautify css (style and class)
-- add and unit tests
+- add and check unit tests
 
-- 翻譯
-- 發音
+- translate
 
 # DONE
 
@@ -15,6 +17,8 @@
 
 # CHANGE LOG
 
+- 20210312
+  1. improve unit test
 - 20210310
   1. improve interface
   2. add yes-no-dialog and ask user to confirm deletion

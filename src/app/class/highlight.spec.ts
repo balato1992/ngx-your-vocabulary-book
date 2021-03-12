@@ -2,6 +2,6 @@ import { Highlight } from './highlight';
 
 describe('Highlight', () => {
   it('should create an instance', () => {
-    expect(new Highlight()).toBeTruthy();
+    expect(new Highlight(0, 0)).toBeTruthy();
   });
 });
