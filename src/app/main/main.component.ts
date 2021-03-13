@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { WordManagerService } from '../service/word-manager.service';
+import { WebSpeechService } from '../service/web-speech.service';
+import { VoiceItem } from '../class/voice-item';
 import { WordForView } from '../class/word-for-view';
 
 @Component({
@@ -14,32 +16,63 @@ export class MainComponent implements OnInit {
   wordForViews: WordForView[] = [];
   currentHoverIndex: number = -1;
 
-  constructor(private wordManagerService: WordManagerService) { }
+  voiceItems: VoiceItem[] = [];
+  selectedVoiceItem: VoiceItem | undefined = undefined;
 
-  ngOnInit(): void {
-    this.getItem();
+  constructor(private wordManagerService: WordManagerService, private webSpeechService: WebSpeechService) {
   }
 
-  getItem(): void {
+  ngOnInit(): void {
+    this.getWords();
+
+    this.initVoices();
+    this.webSpeechService.voicesChangedEvent.subscribe((o) => {
+      this.initVoices();
+    });
+  }
+
+  initVoices() {
+
+    let voiceItems = this.webSpeechService.getVoicesData();
+
+    this.voiceItems = voiceItems;
+    if (voiceItems.length > 0 &&
+      (this.selectedVoiceItem === undefined || voiceItems.findIndex(v => v.name === this.selectedVoiceItem?.name) < 0)) {
+      this.selectedVoiceItem = voiceItems[0];
+    }
+    else {
+      this.selectedVoiceItem = undefined;
+    }
+  }
+
+  getWords(): void {
     this.wordManagerService.get()
       .subscribe(viewItems => this.wordForViews = viewItems);
   }
-  addItem(): void {
+  addWord(): void {
     this.wordManagerService.add(this.sentence);
-    this.getItem();
+    this.getWords();
     this.sentence = "";
   }
-  deleteItem(uid: string): void {
+  deleteWord(uid: string): void {
     this.wordManagerService.delete(uid);
-    this.getItem();
+    this.getWords();
   }
-  highlightItem(obj: { uid: string, start: number, end: number }): void {
+  highlightWord(obj: { uid: string, start: number, end: number }): void {
     this.wordManagerService.addHighlight(obj.uid, obj.start, obj.end);
-    this.getItem();
+    this.getWords();
   }
+  speak(text: string) {
+
+    if (this.selectedVoiceItem !== undefined) {
+
+      this.webSpeechService.speak(text, this.selectedVoiceItem.name);
+    }
+  }
+
   clearItem(): void {
     this.wordManagerService.clear();
-    this.getItem();
+    this.getWords();
   }
 
   mouseEnter(index: number) {

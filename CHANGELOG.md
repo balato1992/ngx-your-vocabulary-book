@@ -14,6 +14,8 @@
 - highlight text
 - delete sentence
   - confirm
+- speech synthesis
+  - change language
 
 # CHANGE LOG
 

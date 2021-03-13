@@ -9,8 +9,6 @@ import { WordForView } from '../class/word-for-view';
 // TODO: try catch errors, keep data is correct
 export class WordManagerService {
   private wordForViews: WordForView[];
-  //private vocabularyItems: VocabularyItem[];
-  //private highlightTexts: HighlightText[][];
 
   constructor() {
     let words = StorageManager.retrieve();
@@ -43,7 +41,7 @@ export class WordManagerService {
   public addHighlight(uid: string, start: number, end: number) {
     let item = this.wordForViews.find(item => item.word.uid === uid);
 
-    if (item != null) {
+    if (item !== undefined) {
       Word.addHighlight(item.word, start, end);
       item.refresh();
       this.store();
@@ -52,7 +50,7 @@ export class WordManagerService {
   public delete(uid: string) {
 
     this.wordForViews = this.wordForViews.filter(item => {
-      return item.word.uid != uid;
+      return item.word.uid !== uid;
     })
     this.store();
   }

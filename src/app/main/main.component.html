@@ -7,13 +7,17 @@
             <mat-label>Sentence</mat-label>
             <input matInput [(ngModel)]="sentence">
         </mat-form-field>
-        <button mat-flat-button color="primary" (click)="addItem()">Add</button>
+        <button mat-flat-button color="primary" (click)="addWord()">Add</button>
+
+        <app-button-menu-select [voiceItems]="voiceItems" [selectedItem]="selectedVoiceItem"
+            (selectItemChanged)="selectedVoiceItem = $event"></app-button-menu-select>
 
         <table>
             <tr app-word-tr *ngFor="let wfv of wordForViews; let i = index"
                 [class]="(i==currentHoverIndex)?'hover-tr':''" style="display: flex;"
-                [style.background-color]="(i%2)?'':'#eee'" [wordForView]="wfv" (deleteEvent)="deleteItem($event)"
-                (highlightEvent)="highlightItem($event)" (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
+                [style.background-color]="(i%2)?'':'#eee'" [wordForView]="wfv" (highlightEvent)="highlightWord($event)"
+                (deleteEvent)="deleteWord($event)" (speakEvent)="speak($event)" (mouseenter)="mouseEnter(i)"
+                (mouseleave)="mouseLeave()">
             </tr>
         </table>
 

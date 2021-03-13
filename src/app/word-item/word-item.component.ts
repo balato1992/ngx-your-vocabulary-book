@@ -11,8 +11,9 @@ import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog
 })
 export class WordItemComponent implements OnInit {
   @Input() wordForView: WordForView = new WordForView();
-  @Output() deleteEvent = new EventEmitter<string>();
   @Output() highlightEvent = new EventEmitter<{ uid: string, start: number, end: number }>();
+  @Output() deleteEvent = new EventEmitter<string>();
+  @Output() speakEvent = new EventEmitter<string>();
   currentRange: Range | undefined = undefined;
 
   constructor(public dialog: MatDialog) {
@@ -21,21 +22,7 @@ export class WordItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  delete() {
-    const text = "Delete '" + this.wordForView.word.sentence + "'?"
-
-    const dialogRef = this.dialog.open(YesNoDialogComponent, {
-      width: '250px',
-      data: new YesNoDialogComponentData('Confirm Deletion', text)
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.deleteEvent.emit(this.wordForView.word.uid);
-      }
-    });
-  }
-  highlightItem() {
+  highlight() {
     let selection = window.getSelection();
     if (selection) {
       let range = selection.getRangeAt(0);
@@ -79,5 +66,22 @@ export class WordItemComponent implements OnInit {
         selection.removeAllRanges();
       }
     }
+  }
+  delete() {
+    const text = "Delete '" + this.wordForView.word.sentence + "'?"
+
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      width: '250px',
+      data: new YesNoDialogComponentData('Confirm Deletion', text)
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteEvent.emit(this.wordForView.word.uid);
+      }
+    });
+  }
+  speak() {
+    this.speakEvent.emit(this.wordForView.word.sentence);
   }
 }
