@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { WordManagerService } from '../service/word-manager.service';
-import { WebSpeechService } from '../service/web-speech.service';
-import { VoiceItem } from '../class/voice-item';
-import { WordForView } from '../class/word-for-view';
+import { WordManagerService } from '../../service/word-manager.service';
+import { WebSpeechService } from '../../service/web-speech.service';
+import { VoiceItem } from '../../class/voice-item';
+import { WordForView } from '../../class/word-for-view';
 
 @Component({
   selector: 'app-main',

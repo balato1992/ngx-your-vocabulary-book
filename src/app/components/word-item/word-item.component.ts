@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { WordForView } from '../class/word-for-view';
+import { WordForView } from '../../class/word-for-view';
 import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog/yes-no-dialog.component';
 
 @Component({

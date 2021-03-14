@@ -1,9 +1,11 @@
 
 # TODO
 
-- google text speech
-- language
+- speech synthesis speaking animation and hint
 - multipage for different variety of sentence
+- improve highlight
+- improve clear all
+
 - beautify css (style and class)
 - add and check unit tests
 
@@ -19,6 +21,11 @@
 
 # CHANGE LOG
 
+- 20210314
+  1. change file path
+  2. Word add insertDate
+- 20210313
+  1. add speech synthesis
 - 20210312
   1. improve unit test
 - 20210310

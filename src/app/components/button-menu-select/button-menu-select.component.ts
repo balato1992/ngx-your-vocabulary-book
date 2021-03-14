@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { VoiceItem } from '../class/voice-item';
+import { VoiceItem } from '../../class/voice-item';
 
 @Component({
   selector: 'app-button-menu-select',

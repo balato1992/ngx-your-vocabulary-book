@@ -2,13 +2,16 @@ import { Highlight } from './highlight';
 import { HighlightText } from './highlight-text';
 
 export class Word {
-    uid: string = "";
-    sentence: string = "";
-    private highlights: Highlight[] = [];
+    uid: string;
+    sentence: string;
+    insertDate: Date;
+    private highlights: Highlight[];
 
     constructor(sentence: string = "") {
         this.uid = Word.getUid();
         this.sentence = sentence;
+        this.insertDate = new Date();
+        this.highlights = [];
     }
 
     private static getUid(): string {

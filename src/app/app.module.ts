@@ -12,11 +12,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
-import { WordItemComponent } from './word-item/word-item.component';
-import { MenuButtonComponent } from './menu-button/menu-button.component';
-import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
-import { ButtonMenuSelectComponent } from './button-menu-select/button-menu-select.component';
+import { MainComponent } from './components/main/main.component';
+import { WordItemComponent } from './components/word-item/word-item.component';
+import { MenuButtonComponent } from './components/menu-button/menu-button.component';
+import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
+import { ButtonMenuSelectComponent } from './components/button-menu-select/button-menu-select.component';
 
 
 @NgModule({
