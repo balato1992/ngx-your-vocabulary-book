@@ -32,16 +32,23 @@ export class MainComponent implements OnInit {
   }
 
   initVoices() {
+    console.log("--initVoices");
 
     let voiceItems = this.webSpeechService.getVoicesData();
 
     this.voiceItems = voiceItems;
+    console.log(JSON.stringify(voiceItems));
     if (voiceItems.length > 0 &&
       (this.selectedVoiceItem === undefined || voiceItems.findIndex(v => v.name === this.selectedVoiceItem?.name) < 0)) {
       this.selectedVoiceItem = voiceItems[0];
+
+      console.log(JSON.stringify(this.selectedVoiceItem));
     }
     else {
       this.selectedVoiceItem = undefined;
+
+      console.log("undefined");
+      console.log(JSON.stringify(this.selectedVoiceItem));
     }
   }
 

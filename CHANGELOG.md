@@ -1,11 +1,20 @@
 
 # TODO
 
-- speech synthesis speaking animation and hint
+- speech synthesis
+  - speaking animation and hint
+  - bug: android
+  - init option error
+  - envirovent without api
 - multipage for different variety of sentence
 - improve highlight
 - improve clear all
+- remark
+- help
+- bug: language initial with --
 
+- mulitple language
+- dark mode
 - beautify css (style and class)
 - add and check unit tests
 
@@ -13,14 +22,17 @@
 
 # DONE
 
-- highlight text
-- delete sentence
-  - confirm
-- speech synthesis
-  - change language
+- sentence
+  - add
+  - delete(confirm dialog)
+  - highlight text
+  - speech synthesis
+    - change language
 
 # CHANGE LOG
 
+- 20210315
+  1. improve highlight selection: full line height -> text line height
 - 20210314
   1. change file path
   2. Word add insertDate
