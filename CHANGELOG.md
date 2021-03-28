@@ -12,6 +12,9 @@
 - remark
 - help
 - bug: language initial with --
+- cloud storage
+- google authentication
+- review feature (notification)
 
 - mulitple language
 - dark mode
