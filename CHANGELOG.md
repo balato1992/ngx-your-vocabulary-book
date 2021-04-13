@@ -34,6 +34,8 @@
 
 # CHANGE LOG
 
+- 20210413
+  1. change css to scss
 - 20210315
   1. improve highlight selection: full line height -> text line height
 - 20210314
