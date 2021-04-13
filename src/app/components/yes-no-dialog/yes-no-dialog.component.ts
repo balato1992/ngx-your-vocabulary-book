@@ -13,8 +13,7 @@ export class YesNoDialogComponentData {
 
 @Component({
   selector: 'app-yes-no-dialog',
-  templateUrl: './yes-no-dialog.component.html',
-  styleUrls: ['./yes-no-dialog.component.css']
+  templateUrl: './yes-no-dialog.component.html'
 })
 export class YesNoDialogComponent implements OnInit {
 

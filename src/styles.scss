@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import './_variables.scss';
+
+@include mat-core();
+
+@include angular-material-theme($theme);
+
+.darkTheme {
+    @include angular-material-theme($dark-t);
+}
+
+.custom-primary {
+    background-color: mat-color($primary);
+    color           : $primary-text;
+
+    a,
+    a:active,
+    a:hover,
+    a:visited {
+        color: $primary-text;
+    }
+}
+
+// general:
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin     : 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.float-menu {
+    display: none;
+}
+.hover-tr > .float-menu {
+    display: flex;
+}

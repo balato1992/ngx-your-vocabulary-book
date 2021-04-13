@@ -7,7 +7,7 @@ import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog
 @Component({
   selector: '[app-word-tr]',
   templateUrl: './word-item.component.html',
-  styleUrls: ['./word-item.component.css']
+  styleUrls: ['./word-item.component.scss']
 })
 export class WordItemComponent implements OnInit {
   @Input() wordForView: WordForView = new WordForView();
