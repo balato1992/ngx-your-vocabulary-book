@@ -5,7 +5,7 @@
             [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
     </div>
 </td>
-<td class="float-menu margin-custom">
+<td class="margin-custom" [style.display]="iconVisiable ? 'flex' : 'none'">
 
     <button mat-icon-button color="primary" (click)="speak()">
         <mat-icon>volume_up</mat-icon>

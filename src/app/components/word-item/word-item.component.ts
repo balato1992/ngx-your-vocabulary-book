@@ -11,6 +11,8 @@ import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog
 })
 export class WordItemComponent implements OnInit {
   @Input() wordForView: WordForView = new WordForView();
+  @Input() iconVisiable: boolean = false;
+
   @Output() highlightEvent = new EventEmitter<{ uid: string, start: number, end: number }>();
   @Output() deleteEvent = new EventEmitter<string>();
   @Output() speakEvent = new EventEmitter<string>();
