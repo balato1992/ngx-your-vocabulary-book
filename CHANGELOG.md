@@ -34,6 +34,8 @@
 
 # CHANGE LOG
 
+- 2021041
+  1. use variable to control icon visibility instead of class
 - 20210413
   1. change css to scss
 - 20210315
