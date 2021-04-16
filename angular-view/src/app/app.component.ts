@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'ngx-your-vocabulary-book';
+  title = 'your-vocabulary-book-angular-view';
 }

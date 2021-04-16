@@ -16,9 +16,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ngx-your-vocabulary-book'`, () => {
+  it(`should have as title 'your-vocabulary-book-angular-view'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ngx-your-vocabulary-book');
+    expect(app.title).toEqual('your-vocabulary-book-angular-view');
   });
 });

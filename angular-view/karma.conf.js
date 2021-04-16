@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/ngx-your-vocabulary-book'),
+      dir: require('path').join(__dirname, './coverage/your-vocabulary-book-angular-view'),
       subdir: '.',
       reporters: [
         { type: 'html' },

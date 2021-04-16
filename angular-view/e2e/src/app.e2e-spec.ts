@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('ngx-your-vocabulary-book app is running!');
+    expect(await page.getTitleText()).toEqual('your-vocabulary-book-angular-view app is running!');
   });
 
   afterEach(async () => {

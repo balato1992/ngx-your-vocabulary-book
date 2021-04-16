@@ -1,12 +1,5 @@
-# NgxYourVocabularyBook
 
-[DEMO](https://your-vocabulary-book.azurewebsites.net/)
-
-## Introduction
-
-新增句子或問答，資料將於下方呈現，用來複習新增的句子與問答
-
-Add some sentences or Q&A you want and the data will show below you can review the sentence or question in randon order.
+# Your Vocabulary Book
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
 
