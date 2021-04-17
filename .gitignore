@@ -2,7 +2,6 @@
 
 # compiled output
 /dist
-/angular-view/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -10,8 +9,6 @@
 
 # dependencies
 /node_modules
-/angular-view/node_modules
-/express-server/node_modules
 
 # profiling files
 chrome-profiler-events*.json
@@ -47,3 +44,10 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+# custom
+/angular-view/dist
+/angular-view/node_modules
+/express-server/node_modules
+/express-server/views/dist
