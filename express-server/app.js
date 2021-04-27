@@ -4,12 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var mymongoose = require('./database/my-mongoose');
-var usersRouter = require('./routes/users');
+var myMongoose = require('./database/my-mongoose');
+var infosRouter = require('./routes/infos');
+var customLog = require('./logService');
+
+customLog('server start');
+
+myMongoose.connect();
 
 var app = express();
-
-mymongoose.connect();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -17,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views/dist/your-vocabulary-book-angular-view')));
 
-app.use('/users', usersRouter);
+app.use('/api', infosRouter);
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/dist/your-vocabulary-book-angular-view/index.html'));
 });

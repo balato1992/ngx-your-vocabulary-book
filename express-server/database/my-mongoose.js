@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const CONFIG = require('../config');
 
-const mongoUri = '';
+const mongoUri = CONFIG.mongoUri;
 
 function connect() {
     mongoose.connect(mongoUri, {
