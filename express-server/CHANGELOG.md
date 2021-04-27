@@ -16,6 +16,8 @@
 
 ## CHANGE LOG
 
+- 20210428
+  1. add google auth
 - 20210427
   1. mongoose: add config and logInfo
 - 20210418

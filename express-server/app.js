@@ -1,26 +1,39 @@
-var createError = require('http-errors');
 var express = require('express');
+var session = require("express-session");
+//var cookieParser = require('cookie-parser');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var createError = require('http-errors');
 var logger = require('morgan');
+var passport = require('passport');
 
-var myMongoose = require('./database/my-mongoose');
+const CONFIG = require('./config');
+require('./auth/config');
+require('./database/my-mongoose').connect();
 var infosRouter = require('./routes/infos');
 var customLog = require('./logService');
 
 customLog('server start');
-
-myMongoose.connect();
 
 var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(session({
+    secret: "-secret code here-",
+    resave: true,
+    saveUninitialized: true
+}));
+//app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'views/dist/your-vocabulary-book-angular-view')));
-
 app.use('/api', infosRouter);
+
+app.get('/auth/google',
+    passport.authenticate('google', { scope: CONFIG.oAuth_scope }));
+app.get('/' + CONFIG.oAuth_redirect_postfix,
+    passport.authenticate('google'));
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/dist/your-vocabulary-book-angular-view/index.html'));
 });
@@ -38,7 +51,7 @@ app.use(function (err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.send(JSON.stringify(err)); // res.render('error');
 });
 
 module.exports = app;
