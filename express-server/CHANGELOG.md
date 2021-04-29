@@ -2,13 +2,17 @@
 
 ## TODO
 
-- mongoose.connect timing
+- login: success and failure message, get session in angular
+- check mongoose.connect timing
 - check morgan
 - check error handler
 - check 404 http-errors
 - check error handler
 
 [mongodb](https://docs.microsoft.com/zh-tw/azure/cosmos-db/tutorial-develop-mongodb-nodejs-part5)
+[google auth](http://www.passportjs.org/docs/google/)
+
+https://paul-senon.medium.com/node-express-js-cookies-set-get-secure-884311606148
 
 ## DONE
 

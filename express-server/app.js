@@ -1,5 +1,4 @@
 var express = require('express');
-var session = require("express-session");
 //var cookieParser = require('cookie-parser');
 var path = require('path');
 var createError = require('http-errors');
@@ -19,21 +18,22 @@ var app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(session({
-    secret: "-secret code here-",
-    resave: true,
-    saveUninitialized: true
-}));
 //app.use(cookieParser());
 app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'views/dist/your-vocabulary-book-angular-view')));
 app.use('/api', infosRouter);
 
 app.get('/auth/google',
-    passport.authenticate('google', { scope: CONFIG.oAuth_scope }));
+    passport.authenticate('google', {
+        session: false,
+        scope: CONFIG.oAuth_scope
+    }));
 app.get('/' + CONFIG.oAuth_redirect_postfix,
-    passport.authenticate('google'));
+    passport.authenticate('google', {
+        session: false,
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }));
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/dist/your-vocabulary-book-angular-view/index.html'));
 });

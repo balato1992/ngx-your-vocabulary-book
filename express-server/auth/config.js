@@ -12,22 +12,11 @@ passport.use(new GoogleStrategy({
 },
   (accessToken, refreshToken, profile, done) => {
     console.log("--google--");
-    console.log(profile.name);
     console.log(profile.displayName);
-    console.log(profile.username);
+    console.log(profile.emails);
 
     User.findOrCreate({ googleId: profile.id }, (err, user) => {
       return done(err, user);
     });
   }
 ));
-
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
-});
