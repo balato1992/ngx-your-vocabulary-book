@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { WordItemComponent } from './components/word-item/word-item.component';
@@ -30,6 +31,7 @@ import { ButtonMenuSelectComponent } from './components/button-menu-select/butto
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
