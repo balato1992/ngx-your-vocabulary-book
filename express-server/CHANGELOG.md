@@ -14,9 +14,13 @@
 
 https://paul-senon.medium.com/node-express-js-cookies-set-get-secure-884311606148
 
+https://medium.com/front-end-weekly/learn-using-jwt-with-passport-authentication-9761539c4314
+https://medium.com/swlh/everything-you-need-to-know-about-the-passport-jwt-passport-js-strategy-8b69f39014b0
+
 ## DONE
 
-- sentence
+- login with jwt auth
+- google auth
 
 ## CHANGE LOG
 

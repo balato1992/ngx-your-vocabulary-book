@@ -1,4 +1,4 @@
-const LogInfo = require('./logInfo.model');
+const LogInfo = require('mongoose').model('LogInfo');
 
 function getLogInfos(req, res) {
     const docquery = LogInfo.find({});

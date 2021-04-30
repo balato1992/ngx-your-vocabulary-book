@@ -1,9 +1,9 @@
 // reference: http://www.passportjs.org/docs/google/
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const CONFIG = require('../config');
-var User = require('../database/user.model');
+const User = require('mongoose').model('User');
 
 passport.use(new GoogleStrategy({
   clientID: CONFIG.oAuth_id,

@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
 
-const infoSchema = mongoose.Schema({
+const infoSchema = new mongoose.Schema({
     str1: { type: String },
     str2: { type: String },
 }, {
     timestamps: { createdAt: 'created_at' }
 });
 
-const LogInfo = mongoose.model('Info', infoSchema);
-
-module.exports = LogInfo;
+mongoose.model('LogInfo', infoSchema);
