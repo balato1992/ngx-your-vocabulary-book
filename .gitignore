@@ -51,3 +51,5 @@ Thumbs.db
 /angular-view/node_modules
 /express-server/node_modules
 /express-server/views/dist
+/express-server/id_rsa_priv.pem
+/express-server/id_rsa_pub.pem

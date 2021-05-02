@@ -19,6 +19,8 @@ import { MenuButtonComponent } from './components/menu-button/menu-button.compon
 import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
 import { ButtonMenuSelectComponent } from './components/button-menu-select/button-menu-select.component';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,12 @@ import { ButtonMenuSelectComponent } from './components/button-menu-select/butto
     MatListModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

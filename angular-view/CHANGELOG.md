@@ -1,6 +1,7 @@
 
 # TODO
 
+- check Interceptor
 - speech synthesis
   - speaking animation and hint
   - bug: android
@@ -15,6 +16,7 @@
 - cloud storage
 - google authentication
 - review feature (notification)
+- route 404
 
 - mulitple language
 - dark mode
@@ -34,6 +36,8 @@
 
 # CHANGE LOG
 
+- 20210502
+  1. get token and attach to header
 - 20210430
   1. add router
 - 20210414

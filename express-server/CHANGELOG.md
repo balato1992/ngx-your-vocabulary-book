@@ -3,11 +3,13 @@
 ## TODO
 
 - login: success and failure message, get session in angular
+- catch exception in post or main
 - check mongoose.connect timing
 - check morgan
 - check error handler
 - check 404 http-errors
 - check error handler
+- XSS test
 
 [mongodb](https://docs.microsoft.com/zh-tw/azure/cosmos-db/tutorial-develop-mongodb-nodejs-part5)
 [google auth](http://www.passportjs.org/docs/google/)
