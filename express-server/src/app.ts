@@ -1,8 +1,8 @@
-var express = require('express');
+import * as express from "express";
 import * as path from "path";
-var createError = require('http-errors');
-var logger = require('morgan');
-var passport = require('passport');
+import * as createError from "http-errors";
+import * as logger from "morgan";
+import * as passport from "passport";
 
 require('./database/config');
 require('./auth/config.google');

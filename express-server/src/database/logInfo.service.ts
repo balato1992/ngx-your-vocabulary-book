@@ -1,6 +1,8 @@
-const LogInfo = require('mongoose').model('LogInfo');
+import * as mongoose from 'mongoose';
 
-function getLogInfos(req, res) {
+const LogInfo = mongoose.model('LogInfo');
+
+export function getLogInfos(req, res) {
     const docquery = LogInfo.find({});
     docquery
         .exec()
@@ -13,7 +15,7 @@ function getLogInfos(req, res) {
         });
 }
 
-function _setLogInfos(str1, str2 = null) {
+export function _setLogInfos(str1, str2 = null) {
     const logInfo = new LogInfo({ str1: str1, str2: str2 });
     logInfo.save(error => {
         if (error) {
@@ -24,9 +26,3 @@ function _setLogInfos(str1, str2 = null) {
         console.log('logInfo created successfully!');
     });
 }
-
-
-module.exports = {
-    getLogInfos,
-    _setLogInfos
-};

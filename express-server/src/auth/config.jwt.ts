@@ -1,10 +1,11 @@
 // reference: https://medium.com/swlh/everything-you-need-to-know-about-the-passport-jwt-passport-js-strategy-8b69f39014b0
-const passport = require('passport');
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
 import * as fs from "fs";
 import * as path from "path";
-const User = require('mongoose').model('User');
+import * as passport from "passport";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+import * as mongoose from 'mongoose';
+
+const User = mongoose.model('User');
 
 const pathToKey = path.join(__dirname, '../..', 'id_rsa_pub.pem');
 const PUB_KEY = fs.readFileSync(pathToKey, 'utf8');

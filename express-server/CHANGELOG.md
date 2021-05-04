@@ -26,6 +26,9 @@ https://medium.com/swlh/everything-you-need-to-know-about-the-passport-jwt-passp
 
 ## CHANGE LOG
 
+- 20210504
+  1. use typescript
+  2. require -> import
 - 20210428
   1. add google auth
 - 20210427

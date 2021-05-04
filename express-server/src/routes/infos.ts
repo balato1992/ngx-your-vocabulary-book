@@ -1,5 +1,5 @@
-var express = require('express');
-var logInfosService = require('../database/logInfo.service');
+import * as express from 'express';
+import * as logInfosService from '../database/logInfo.service';
 
 var router = express.Router();
 

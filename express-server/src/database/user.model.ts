@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const findOrCreate = require('mongoose-findorcreate')
+import * as mongoose from 'mongoose';
+import * as findOrCreate from 'mongoose-findorcreate';
 
 const UserSchema = new mongoose.Schema({
     googleId: { type: String, },

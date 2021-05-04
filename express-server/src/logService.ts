@@ -1,4 +1,4 @@
-var logInfosService = require('./database/logInfo.service');
+import * as logInfosService from './database/logInfo.service';
 
 let customLog = logInfosService._setLogInfos;
 
