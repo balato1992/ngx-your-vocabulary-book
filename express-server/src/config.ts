@@ -1,13 +1,13 @@
 
-const redirect_postfix = 'oauth2callback';
+const redirect_postfix = 'google/callback';
 
-module.exports = {
+export const CONFIG = {
     oAuth_id: '',
     oAuth_pass: '',
     oAuth_scope: [
     ],
     oAuth_redirect_postfix: redirect_postfix,
-    oAuth_redirect: '' + redirect_postfix,
+    oAuth_redirect: 'http://localhost:3000/auth/' + redirect_postfix,
 
     mongoUri: ''
 };

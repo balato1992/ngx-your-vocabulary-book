@@ -1,10 +1,9 @@
 // reference: https://medium.com/swlh/everything-you-need-to-know-about-the-passport-jwt-passport-js-strategy-8b69f39014b0
-const crypto = require('crypto');
 const jsonwebtoken = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
+import * as fs from "fs";
+import * as path from "path";
 
-const pathToKey = path.join(__dirname, '..', 'id_rsa_priv.pem');
+const pathToKey = path.join(__dirname, '../..', 'id_rsa_priv.pem');
 const PRIV_KEY = fs.readFileSync(pathToKey, 'utf8');
 
 /**

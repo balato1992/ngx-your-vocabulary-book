@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const CONFIG = require('../config');
+import { CONFIG } from '../config';
 
 const mongoUri = CONFIG.mongoUri;
 

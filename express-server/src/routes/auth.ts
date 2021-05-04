@@ -3,7 +3,7 @@ const passport = require('passport');
 const querystring = require("querystring");
 const User = require('mongoose').model('User');
 
-const CONFIG = require('../config');
+import { CONFIG } from '../config';
 const utils = require('../lib/utils');
 
 router.get('/protected', passport.authenticate('jwt', { session: false }), async (req, res, next) => {

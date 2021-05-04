@@ -2,7 +2,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-const CONFIG = require('../config');
+import { CONFIG } from '../config';
 const User = require('mongoose').model('User');
 
 passport.use(new GoogleStrategy({

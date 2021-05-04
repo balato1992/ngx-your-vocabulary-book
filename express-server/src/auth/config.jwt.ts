@@ -2,11 +2,11 @@
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const fs = require('fs');
-const path = require('path');
+import * as fs from "fs";
+import * as path from "path";
 const User = require('mongoose').model('User');
 
-const pathToKey = path.join(__dirname, '..', 'id_rsa_pub.pem');
+const pathToKey = path.join(__dirname, '../..', 'id_rsa_pub.pem');
 const PUB_KEY = fs.readFileSync(pathToKey, 'utf8');
 
 // At a minimum, you must pass the `jwtFromRequest` and `secretOrKey` properties

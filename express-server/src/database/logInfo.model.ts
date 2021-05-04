@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import * as mongoose from 'mongoose';
 
 const infoSchema = new mongoose.Schema({
     str1: { type: String },
