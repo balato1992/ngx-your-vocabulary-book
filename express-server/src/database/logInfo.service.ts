@@ -1,6 +1,4 @@
-import * as mongoose from 'mongoose';
-
-const LogInfo = mongoose.model('LogInfo');
+import { LogInfo } from '../database/logInfo.model';
 
 export function getLogInfos(req, res) {
     const docquery = LogInfo.find({});

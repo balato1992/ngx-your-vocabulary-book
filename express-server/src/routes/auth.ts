@@ -1,12 +1,12 @@
 import * as express from 'express';
 import * as passport from 'passport';
-import * as mongoose from 'mongoose';
-const router = express.Router();
-const User = mongoose.model('User');
 
 import { CONFIG } from '../config';
 import * as utils from '../lib/utils';
+import { User } from '../database/user.model';
 import { IGetUserAuthInfoRequest } from '../lib/definitions';
+
+const router = express.Router();
 
 router.get('/protected', passport.authenticate('jwt', { session: false }),
   async (req: IGetUserAuthInfoRequest, res, next) => {

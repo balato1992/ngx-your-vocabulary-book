@@ -29,6 +29,7 @@ https://medium.com/swlh/everything-you-need-to-know-about-the-passport-jwt-passp
 - 20210504
   1. use typescript
   2. require -> import
+  3. update mongoose.model
 - 20210428
   1. add google auth
 - 20210427

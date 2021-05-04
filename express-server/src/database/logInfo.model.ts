@@ -7,4 +7,6 @@ const infoSchema = new mongoose.Schema({
     timestamps: { createdAt: 'created_at' }
 });
 
-mongoose.model('LogInfo', infoSchema);
+let LogInfo = mongoose.model('LogInfo', infoSchema);
+
+export { LogInfo };

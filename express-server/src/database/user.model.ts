@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-import * as findOrCreate from 'mongoose-findorcreate';
 
 const UserSchema = new mongoose.Schema({
     googleId: { type: String, },
@@ -12,6 +11,6 @@ const UserSchema = new mongoose.Schema({
     timestamps: { createdAt: 'created_at' }
 });
 
-UserSchema.plugin(findOrCreate);
+let User = mongoose.model('User', UserSchema);
 
-mongoose.model('User', UserSchema);
+export { User };

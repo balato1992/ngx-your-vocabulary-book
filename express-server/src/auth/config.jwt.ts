@@ -3,9 +3,8 @@ import * as fs from "fs";
 import * as path from "path";
 import * as passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-import * as mongoose from 'mongoose';
 
-const User = mongoose.model('User');
+import { User } from '../database/user.model';
 
 const pathToKey = path.join(__dirname, '../..', 'id_rsa_pub.pem');
 const PUB_KEY = fs.readFileSync(pathToKey, 'utf8');

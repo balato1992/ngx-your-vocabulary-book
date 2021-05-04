@@ -1,10 +1,10 @@
 // reference: http://www.passportjs.org/docs/google/
 import * as passport from "passport";
 import { OAuth2Strategy as GoogleStrategy } from "passport-google-oauth";
-import * as mongoose from 'mongoose';
 
 import { CONFIG } from '../config';
-const User = mongoose.model('User');
+import { User } from '../database/user.model';
+
 
 passport.use(new GoogleStrategy({
   clientID: CONFIG.oAuth_id,
@@ -16,8 +16,13 @@ passport.use(new GoogleStrategy({
     console.log(profile.displayName);
     console.log(profile.emails);
 
-    (User as any).findOrCreate({ googleId: profile.id }, (err, user) => {
-      return done(err, user);
+    let findUser = { googleId: profile.id };
+
+    User.findOne(findUser, (err, user) => {
+
+      return user
+        ? done(err, user)
+        : User.create(findUser, (err, user) => { return done(err, user) })
     });
   }
 ));
