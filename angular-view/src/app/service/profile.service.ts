@@ -10,23 +10,30 @@ import { UrlService } from './url.service';
     providedIn: 'root'
 })
 export class ProfileService {
-    
+
     constructor(
         private http: HttpClient,
         private messageService: MessageService,
         private urlService: UrlService,) { }
 
-    get(): Observable<any> {
+    get(errorCallback: () => void): Observable<any> {
 
         return this.http.get<any>(this.urlService.auth_profile)
             .pipe(
                 tap(_ => this.log('fetched profile')),
-                catchError(this.handleError<any>('get', null))
+                catchError(this.handleError<any>('get', errorCallback, null))
             );
     }
 
-    private handleError<T>(operation = 'operation', result?: T) {
+    private handleError<T>(operation = 'operation', callback: () => void, result?: T) {
         return (error: any): Observable<T> => {
+
+            try {
+                callback();
+            }
+            catch (err) {
+                console.error(`handleError callback error: ${err}`);
+            }
 
             // TODO: send the error to remote logging infrastructure
             console.error(error); // log to console instead

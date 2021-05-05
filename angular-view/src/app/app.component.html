@@ -8,7 +8,7 @@
             </td>
             <td>
                 <div style="padding: 12px;">
-                    <ng-template [ngIf]="hasProfile" [ngIfElse]="elseBlock">
+                    <ng-template [ngIf]="hasProfile===true">
                         <button mat-button [matMenuTriggerFor]="menu" aria-label="User button with a menu">
                             {{userInfo?.name}}
                             <mat-icon>arrow_drop_down</mat-icon>
@@ -20,7 +20,7 @@
                             </button>
                         </mat-menu>
                     </ng-template>
-                    <ng-template #elseBlock>
+                    <ng-template [ngIf]="hasProfile===false">
                         <button mat-raised-button style="font-size: 14px; padding: 0 12px;" (click)="redirectToAuth()">
                             <mat-icon svgIcon="google"
                                 style="font-size: 18px; height: 18px; width: 18px; line-height: 18px; padding-right: 20px;">

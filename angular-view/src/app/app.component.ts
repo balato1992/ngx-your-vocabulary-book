@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -13,14 +13,13 @@ import { UrlService } from './service/url.service';
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'your-vocabulary-book-angular-view';
 
-  hasProfile: boolean = false;
+  hasProfile: boolean | undefined = undefined;
   userInfo: any = {};
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
     private profileService: ProfileService,
@@ -31,9 +30,6 @@ export class AppComponent implements OnInit {
 
     this.setGoogleLogoSvg();
     this.saveAuthTokenFromParam();
-  }
-
-  ngOnInit(): void {
     this.getProfile();
   }
 
@@ -84,12 +80,17 @@ export class AppComponent implements OnInit {
     const idToken = this.authService.getToken();
     if (idToken) {
 
-      this.hasProfile = false;
-      this.profileService.get().subscribe((result) => {
+      this.profileService.get(() => {
+        this.hasProfile = false;
+      }).subscribe((result) => {
 
         this.userInfo = { name: result.displayName };
         this.hasProfile = true;
       });
+    }
+    else {
+
+      this.hasProfile = false;
     }
   }
 
