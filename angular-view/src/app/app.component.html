@@ -8,7 +8,7 @@
             </td>
             <td>
                 <div style="padding: 12px;">
-                    <ng-template *ngIf="hasProfile; else elseBlock">
+                    <ng-template [ngIf]="hasProfile" [ngIfElse]="elseBlock">
                         <button mat-button [matMenuTriggerFor]="menu" aria-label="User button with a menu">
                             {{userInfo?.name}}
                             <mat-icon>arrow_drop_down</mat-icon>
