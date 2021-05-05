@@ -24,6 +24,7 @@
 - add and check unit tests
 
 - translate
+- aria-label
 
 # DONE
 
@@ -36,6 +37,8 @@
 
 # CHANGE LOG
 
+- 20210505
+  1. add google login
 - 20210502
   1. get token and attach to header
 - 20210430

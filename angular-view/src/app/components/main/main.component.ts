@@ -19,7 +19,9 @@ export class MainComponent implements OnInit {
   voiceItems: VoiceItem[] = [];
   selectedVoiceItem: VoiceItem | undefined = undefined;
 
-  constructor(private wordManagerService: WordManagerService, private webSpeechService: WebSpeechService) {
+  constructor(
+    private wordManagerService: WordManagerService,
+    private webSpeechService: WebSpeechService) {
   }
 
   ngOnInit(): void {

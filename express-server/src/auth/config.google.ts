@@ -20,9 +20,14 @@ passport.use(new GoogleStrategy({
 
     User.findOne(findUser, (err, user) => {
 
+      let createUser = {
+        googleId: profile.id,
+        displayName: profile.displayName
+      };
+
       return user
         ? done(err, user)
-        : User.create(findUser, (err, user) => { return done(err, user) })
+        : User.create(createUser, (err, user) => { return done(err, user) })
     });
   }
 ));
