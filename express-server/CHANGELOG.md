@@ -23,9 +23,13 @@ https://medium.com/swlh/everything-you-need-to-know-about-the-passport-jwt-passp
 
 - login with jwt auth
 - google auth
+  - select account every time
+- typescript
 
 ## CHANGE LOG
 
+- 20210505
+  1. google auth: select account every time
 - 20210504
   1. use typescript
   2. require -> import

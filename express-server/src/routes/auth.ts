@@ -8,7 +8,7 @@ import { IGetUserAuthInfoRequest } from '../lib/definitions';
 
 const router = express.Router();
 
-router.get('/protected', passport.authenticate('jwt', { session: false }),
+router.get('/profile', passport.authenticate('jwt', { session: false }),
   async (req: IGetUserAuthInfoRequest, res, next) => {
     console.log("--protected");
 
@@ -30,12 +30,13 @@ router.get('/test', (req, res, next) => {
 router.get('/google',
   passport.authenticate('google', {
     session: false,
-    scope: CONFIG.oAuth_scope
+    scope: CONFIG.oAuth_scope,
+    prompt : "select_account", // put this at last
   }));
 
 router.get('/' + CONFIG.oAuth_redirect_postfix,
   passport.authenticate('google', { session: false }),
-  function (req: IGetUserAuthInfoRequest, res) {
+  (req: IGetUserAuthInfoRequest, res) => {
 
     const tokenObject = utils.issueJWT(req.user);
     const data = { success: true, token: tokenObject.token, expiresIn: tokenObject.expires };
