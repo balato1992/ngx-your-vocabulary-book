@@ -8,8 +8,8 @@ export function getLogInfos(req, res) {
             res.status(200).json(infos);
         })
         .catch(error => {
+            // TODO: check
             res.status(500).send(error);
-            return;
         });
 }
 

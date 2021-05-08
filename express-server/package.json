@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "build": "tsc",
-    "dev": "nodemon ./bin/www.ts --ext 'ts,json'"
+    "dev": "SET NODE_ENV=development & nodemon ./bin/www.ts --watch ./src --ext 'ts,json'"
   },
   "dependencies": {
     "cookie-parser": "^1.4.4",

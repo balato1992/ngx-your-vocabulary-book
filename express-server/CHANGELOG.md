@@ -2,6 +2,7 @@
 
 ## TODO
 
+- jwt server logout
 - login: success and failure message, get session in angular
 - catch exception in post or main
 - check mongoose.connect timing
@@ -24,6 +25,8 @@ https://medium.com/swlh/everything-you-need-to-know-about-the-passport-jwt-passp
 - login with jwt auth
 - google auth
   - select account every time
+
+- add NODE_ENV
 - typescript
 
 ## CHANGE LOG

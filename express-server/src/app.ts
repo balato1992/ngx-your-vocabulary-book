@@ -21,6 +21,7 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, '../public/your-vocabulary-book-angular-view')));
 
 app.use('/api', require('./routes/infos'));
+app.use('/api', require('./routes/word-item'));
 app.use('/auth', require('./routes/auth'));
 app.get('*', (req: any, res: any) => {
     res.sendFile(path.join(__dirname, '../public/your-vocabulary-book-angular-view/index.html'));

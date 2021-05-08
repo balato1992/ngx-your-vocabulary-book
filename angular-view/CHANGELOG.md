@@ -37,6 +37,8 @@
 
 # CHANGE LOG
 
+- 20210509
+  1. prepare word items api
 - 20210505
   1. add google login
 - 20210502

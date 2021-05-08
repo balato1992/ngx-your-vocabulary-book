@@ -23,9 +23,6 @@ router.get('/profile', passport.authenticate('jwt', { session: false }),
 
     res.status(200).json(user);
   });
-router.get('/test', (req, res, next) => {
-  res.status(200).json({ success: true, msg: "You are successfully authenticated to this route!" });
-});
 
 router.get('/google',
   passport.authenticate('google', {
