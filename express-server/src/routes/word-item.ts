@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as passport from 'passport';
 import { User } from '../database/user.model';
 import { WordItem } from '../database/word-item.model';
+import { Word } from '../../../common-code/models/word';
 
 var router = express.Router();
 
@@ -10,7 +11,7 @@ router.get('/word-items', passport.authenticate('jwt', { session: false }),
     let userId = req.user._id;
 
     WordItem.find({ user: userId }).
-      populate('user').
+      //populate('user').
       exec()
       .then(wordItems => {
         res.status(200).json(wordItems);
@@ -25,32 +26,69 @@ router.post('/word-items', passport.authenticate('jwt', { session: false }),
 
     console.log("post");
     console.log(req.body);
+
     let userId = req.user._id;
+    let words: Array<any> = req.body;
 
-    let item = {
-      uid: 'id',
-      sentence: 'ss',
-      insertDate: new Date(),
-      highlights: [{
-        start: 1,
-        end: 2
-      }, {
-        start: 3,
-        end: 4
-      }],
+    let dbWords: any = await WordItem.find({ user: userId }).
+      exec()
+      .catch(error => {
+        res.status(500).send(error);
+      });
 
-      user: userId
-    };
+    let tagOfSameId = '_tagOfSameId';
 
-    const session = await WordItem.startSession();
+    for (let dbWord of dbWords) {
+      dbWord[tagOfSameId] = false;
+      for (let word of words) {
+        if (String(word._id) === String(dbWord._id)) {
+          dbWord[tagOfSameId] = true;
+          word[tagOfSameId] = true;
+          break;
+        }
+      }
+    }
 
-    await session.withTransaction((): Promise<any> => {
-      return WordItem.create([item, item], { session: session });
+    let deleteList = dbWords.filter(w => {
+      return w[tagOfSameId] !== true;
+    });
+    console.log('----deleteList');
+    console.log(deleteList);
+    deleteList.forEach(async w => {
+      await WordItem.deleteOne({ _id: w._id }).exec();
     });
 
-    session.endSession();
+    let createList = words.filter(w => {
+      return w[tagOfSameId] !== true;
+    });
+    console.log('----createList');
+    console.log(createList);
+    createList.forEach(async w => {
+      w.user = userId;
+      await WordItem.create(w);
+    });
 
-    res.status(200).json('rr');
+    let updateList = words.filter(w => {
+      // check same data
+      return w[tagOfSameId] === true;
+    });
+    console.log('----updateList');
+    console.log(updateList);
+    updateList.forEach(async w => {
+      await WordItem.updateOne({ _id: w._id }, w).exec();
+    });
+
+
+    /*
+    const session = await WordItem.startSession();
+    
+    await session.withTransaction((): Promise<any> => {
+      return WordItem.create(items, { session: session });
+    });
+
+    session.endSession();*/
+
+    res.status(200).json('success');
   });
 
 module.exports = router;

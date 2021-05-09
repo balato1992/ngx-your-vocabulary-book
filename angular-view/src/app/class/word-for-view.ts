@@ -1,4 +1,4 @@
-import { Word } from './word';
+import { Word } from '../../../../common-code/models/word';
 import { HighlightText } from './highlight-text';
 
 export class WordForView {
@@ -12,5 +12,16 @@ export class WordForView {
 
   refresh() {
     this.highlightTexts = Word.getHighlightText(this.word);
+  }
+
+  static createWordForViews(words: Array<Word>): Array<WordForView> {
+
+    let arr: Array<WordForView> = [];
+
+    for (let word of words) {
+      arr.push(new WordForView(word));
+    }
+
+    return arr;
   }
 }

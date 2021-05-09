@@ -17,6 +17,7 @@
 - google authentication
 - review feature (notification)
 - route 404
+- initial exceeded maximum budget.
 
 - mulitple language
 - dark mode
@@ -37,6 +38,8 @@
 
 # CHANGE LOG
 
+- 20210510
+  1. add 'manual sync data'
 - 20210509
   1. prepare word items api
 - 20210505

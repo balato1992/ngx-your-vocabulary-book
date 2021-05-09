@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Types } from 'mongoose';
 
 import { WordForView } from '../../class/word-for-view';
 import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog/yes-no-dialog.component';
@@ -13,8 +14,8 @@ export class WordItemComponent implements OnInit {
   @Input() wordForView: WordForView = new WordForView();
   @Input() iconVisiable: boolean = false;
 
-  @Output() highlightEvent = new EventEmitter<{ uid: string, start: number, end: number }>();
-  @Output() deleteEvent = new EventEmitter<string>();
+  @Output() highlightEvent = new EventEmitter<{ uid: Types.ObjectId, start: number, end: number }>();
+  @Output() deleteEvent = new EventEmitter<Types.ObjectId>();
   @Output() speakEvent = new EventEmitter<string>();
   currentRange: Range | undefined = undefined;
 
@@ -57,7 +58,7 @@ export class WordItemComponent implements OnInit {
       //console.log(realEnd);
 
       this.highlightEvent.emit({
-        uid: this.wordForView.word.uid || "",
+        uid: this.wordForView.word._id,
         start: realStart,
         end: realEnd
       });
@@ -79,7 +80,7 @@ export class WordItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.deleteEvent.emit(this.wordForView.word.uid);
+        this.deleteEvent.emit(this.wordForView.word._id);
       }
     });
   }

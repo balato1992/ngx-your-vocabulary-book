@@ -1,21 +1,22 @@
 import { Highlight } from './highlight';
-import { HighlightText } from './highlight-text';
+import { HighlightText } from '../../angular-view/src/app/class/highlight-text';
+
+import { Types } from 'mongoose';
 
 export class Word {
-    uid: string;
+    _id: Types.ObjectId;
     sentence: string;
-    insertDate: Date;
-    private highlights: Highlight[];
+    highlights: Highlight[];
+
+    updateDate: Date;
+    user: string | null;
 
     constructor(sentence: string = "") {
-        this.uid = Word.getUid();
+        this._id = new Types.ObjectId();
         this.sentence = sentence;
-        this.insertDate = new Date();
+        this.updateDate = new Date();
         this.highlights = [];
-    }
-
-    private static getUid(): string {
-        return "" + Date.now() + Math.random();
+        this.user = null;
     }
 
     static getHighlightText(word: Word): HighlightText[] {

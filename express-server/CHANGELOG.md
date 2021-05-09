@@ -6,6 +6,7 @@
 - login: success and failure message, get session in angular
 - catch exception in post or main
 - check mongoose.connect timing
+- check mongoose multiple query
 - check morgan
 - check error handler
 - check 404 http-errors
@@ -31,6 +32,10 @@ https://medium.com/swlh/everything-you-need-to-know-about-the-passport-jwt-passp
 
 ## CHANGE LOG
 
+- 20210509
+  1. update 'post word items'
+- 20210509
+  1. prepare word items api
 - 20210505
   1. google auth: select account every time
 - 20210504

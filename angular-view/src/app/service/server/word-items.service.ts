@@ -6,6 +6,8 @@ import { catchError, tap } from 'rxjs/operators';
 import { UrlService } from './url.service';
 import { HandleService } from './handle.service';
 
+import { Word } from '../../../../../common-code/models/word';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -26,7 +28,7 @@ export class WordItemsService {
             );
     }
 
-    post(data: any): Observable<any> {
+    post(data: Array<Word>): Observable<any> {
 
         return this.http.post<any>(this.urlService.api_wordItems, data, this.handleService.httpOptions).pipe(
             tap((newData: any) => this.handleService.log(`added WordItems w/ id=${newData?.id}`)),

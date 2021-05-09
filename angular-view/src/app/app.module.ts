@@ -58,6 +58,7 @@ const matModules = [
       useClass: AuthInterceptor,
       multi: true
     }],
+  entryComponents: [YesNoDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,16 +1,17 @@
 import * as mongoose from 'mongoose';
-const Schema = mongoose.Schema;
+import { Types } from 'mongoose';
 
-const wordItemSchema = new Schema({
-    uid: String,
+const wordItemSchema = new mongoose.Schema({
+    _id: Types.ObjectId,
     sentence: String,
-    insertDate: Date,
     highlights: [{
         start: Number,
         end: Number
     }],
 
-    user: { type: Schema.Types.ObjectId, ref: 'User' }
+    updateDate: Date,
+
+    user: { type: Types.ObjectId, ref: 'User' }
 }, {
     timestamps: { createdAt: 'created_at' }
 });

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Types } from 'mongoose';
 
 import { WordManagerService } from '../../service/word-manager.service';
 import { WebSpeechService } from '../../service/web-speech.service';
+import { WordItemsService } from '../../service/server/word-items.service';
 import { VoiceItem } from '../../class/voice-item';
 import { WordForView } from '../../class/word-for-view';
 
@@ -21,8 +23,8 @@ export class MainComponent implements OnInit {
 
   constructor(
     private wordManagerService: WordManagerService,
-    private webSpeechService: WebSpeechService) {
-  }
+    private webSpeechService: WebSpeechService,
+    private wordItemsService: WordItemsService) { }
 
   ngOnInit(): void {
     this.getWords();
@@ -63,11 +65,11 @@ export class MainComponent implements OnInit {
     this.getWords();
     this.sentence = "";
   }
-  deleteWord(uid: string): void {
+  deleteWord(uid: Types.ObjectId): void {
     this.wordManagerService.delete(uid);
     this.getWords();
   }
-  highlightWord(obj: { uid: string, start: number, end: number }): void {
+  highlightWord(obj: { uid: Types.ObjectId, start: number, end: number }): void {
     this.wordManagerService.addHighlight(obj.uid, obj.start, obj.end);
     this.getWords();
   }
@@ -79,6 +81,12 @@ export class MainComponent implements OnInit {
     }
   }
 
+  manualSync(): void {
+
+    this.wordManagerService.manualSync(() => {
+      this.getWords();
+    });
+  }
   clearItem(): void {
     this.wordManagerService.clear();
     this.getWords();

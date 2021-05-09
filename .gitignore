@@ -53,3 +53,4 @@ Thumbs.db
 /express-server/public
 /express-server/id_rsa_priv.pem
 /express-server/id_rsa_pub.pem
+/common-code/node_modules
