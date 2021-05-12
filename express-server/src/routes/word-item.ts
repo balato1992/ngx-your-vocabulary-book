@@ -1,8 +1,6 @@
 import * as express from 'express';
 import * as passport from 'passport';
-import { User } from '../database/user.model';
 import { WordItem } from '../database/word-item.model';
-import { Word } from '../../../common-code/models/word';
 
 var router = express.Router();
 

@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "build": "tsc",
+    "start": "node ./dist/www.js",
+    "build-local": "tsc",
     "dev": "SET NODE_ENV=development & nodemon ./bin/www.ts --watch ./src --ext 'ts,json'"
   },
   "dependencies": {

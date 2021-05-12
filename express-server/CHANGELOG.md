@@ -32,6 +32,8 @@ https://medium.com/swlh/everything-you-need-to-know-about-the-passport-jwt-passp
 
 ## CHANGE LOG
 
+- 20210512
+  1. build at local not in azure server
 - 20210509
   1. update 'post word items'
 - 20210509

@@ -3,9 +3,10 @@
 
 ## Build Steps
 
-1. run `npm i` in terminal
-2. run `node generateKeypair` in terminal
-3. build angular-view and move files to folder `public/`
+1. run `npm i` in terminal to install pakckage
+2. run `npm run build` in terminal to convert ts to js at `dist`
+3. run `node generateKeypair` in terminal to generate Key of JWT
+4. run `ng build --prod` at `angular-view` in terminal and it will produce files to folder `express-server/public/`
 
 ## Development server
 

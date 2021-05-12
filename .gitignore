@@ -49,8 +49,11 @@ Thumbs.db
 # custom
 /angular-view/dist
 /angular-view/node_modules
+
 /express-server/node_modules
 /express-server/public
+/express-server/dist
 /express-server/id_rsa_priv.pem
 /express-server/id_rsa_pub.pem
+
 /common-code/node_modules
