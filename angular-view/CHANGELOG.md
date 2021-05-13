@@ -38,6 +38,8 @@
 
 # CHANGE LOG
 
+- 20210514
+  1. modify word-item component
 - 20210510
   1. add 'manual sync data'
 - 20210509

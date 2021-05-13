@@ -5,13 +5,40 @@ export class WordForView {
   word: Word;
   highlightTexts: HighlightText[];
 
-  constructor(word: Word = new Word()) {
+  constructor(word: Word) {
     this.word = word;
-    this.highlightTexts = Word.getHighlightText(this.word);
+    this.highlightTexts = WordForView.getHighlightText(this.word);
   }
 
   refresh() {
-    this.highlightTexts = Word.getHighlightText(this.word);
+    this.highlightTexts = WordForView.getHighlightText(this.word);
+  }
+
+  static getHighlightText(word: Word): HighlightText[] {
+
+    let texts: HighlightText[] = [];
+    let pushTextFunc = (start: number, end: number, hl: boolean = false) => {
+      let str = word.sentence.substring(start, end);
+      //console.log("sentence:",sentence);
+      //console.log("start:", start, "end:", end, "str:", str, ".");
+      texts.push(new HighlightText(str, hl));
+    };
+
+    let currentIndex = 0;
+    for (let h of word.highlights) {
+      if (currentIndex < h.start) {
+        pushTextFunc(currentIndex, h.start);
+      }
+
+      pushTextFunc(h.start, h.end, true);
+      currentIndex = h.end;
+    }
+
+    if (currentIndex < word.sentence.length) {
+      pushTextFunc(currentIndex, word.sentence.length);
+    }
+
+    return texts;
   }
 
   static createWordForViews(words: Array<Word>): Array<WordForView> {
@@ -24,4 +51,5 @@ export class WordForView {
 
     return arr;
   }
+
 }

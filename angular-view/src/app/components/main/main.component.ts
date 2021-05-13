@@ -3,7 +3,6 @@ import { Types } from 'mongoose';
 
 import { WordManagerService } from '../../service/word-manager.service';
 import { WebSpeechService } from '../../service/web-speech.service';
-import { WordItemsService } from '../../service/server/word-items.service';
 import { VoiceItem } from '../../class/voice-item';
 import { WordForView } from '../../class/word-for-view';
 
@@ -23,8 +22,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     private wordManagerService: WordManagerService,
-    private webSpeechService: WebSpeechService,
-    private wordItemsService: WordItemsService) { }
+    private webSpeechService: WebSpeechService) { }
 
   ngOnInit(): void {
     this.getWords();
@@ -64,6 +62,10 @@ export class MainComponent implements OnInit {
     this.wordManagerService.add(this.sentence);
     this.getWords();
     this.sentence = "";
+  }
+  updateWord(): void {
+    this.wordManagerService.add(this.sentence);
+    this.getWords();
   }
   deleteWord(uid: Types.ObjectId): void {
     this.wordManagerService.delete(uid);

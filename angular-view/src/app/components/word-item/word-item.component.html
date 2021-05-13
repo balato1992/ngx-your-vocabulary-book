@@ -1,12 +1,11 @@
 <!--{{vItem.sentence}}-->
-<td *ngIf="wordForView.highlightTexts" class="text-width margin-custom">
+<td *ngIf="highlightTexts" class="text-width margin-custom">
     <div style="display: flex; align-items: center;">
-        <span *ngFor="let ht of wordForView.highlightTexts; let i = index" attr.index="{{i}}"
+        <span *ngFor="let ht of highlightTexts; let i = index" attr.index="{{i}}"
             [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
     </div>
 </td>
-<td class="margin-custom" [style.display]="iconVisiable ? 'flex' : 'none'">
-
+<td class="margin-custom" [style.display]="btnVisibility ? 'flex' : 'none'">
     <button mat-icon-button color="primary" (click)="speak()">
         <mat-icon>volume_up</mat-icon>
     </button>

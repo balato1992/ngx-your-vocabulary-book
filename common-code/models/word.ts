@@ -8,43 +8,17 @@ export class Word {
     sentence: string;
     highlights: Highlight[];
 
-    updateDate: Date;
-    user: string | null;
+    client: WordClient;
+    server: WordServer;
 
     constructor(sentence: string = "") {
         this._id = new Types.ObjectId();
         this.sentence = sentence;
-        this.updateDate = new Date();
         this.highlights = [];
-        this.user = null;
+        this.client = new WordClient();
+        this.server = new WordServer();
     }
 
-    static getHighlightText(word: Word): HighlightText[] {
-
-        let texts: HighlightText[] = [];
-        let pushTextFunc = (start: number, end: number, hl: boolean = false) => {
-            let str = word.sentence.substring(start, end);
-            //console.log("sentence:",sentence);
-            //console.log("start:", start, "end:", end, "str:", str, ".");
-            texts.push(new HighlightText(str, hl));
-        };
-
-        let currentIndex = 0;
-        for (let h of word.highlights) {
-            if (currentIndex < h.start) {
-                pushTextFunc(currentIndex, h.start);
-            }
-
-            pushTextFunc(h.start, h.end, true);
-            currentIndex = h.end;
-        }
-
-        if (currentIndex < word.sentence.length) {
-            pushTextFunc(currentIndex, word.sentence.length);
-        }
-
-        return texts;
-    }
     static addHighlight(word: Word, start: number, end: number) {
         if (start < 0 || end < 0 || start >= end) {
             return;
@@ -64,5 +38,26 @@ export class Word {
         word.highlights.sort((a, b) => {
             return a.start - b.start;
         });
+    }
+}
+
+export class WordClient {
+
+    isNew: boolean;
+    isUpdate: boolean;
+
+    constructor(isNew: boolean = false) {
+        this.isNew = isNew;
+        this.isUpdate = false;
+    }
+}
+export class WordServer {
+
+    user: string | null;
+    updateDate: Date | null;
+
+    constructor() {
+        this.user = null;
+        this.updateDate = null;
     }
 }

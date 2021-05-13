@@ -9,9 +9,10 @@ const wordItemSchema = new mongoose.Schema({
         end: Number
     }],
 
-    updateDate: Date,
-
-    user: { type: Types.ObjectId, ref: 'User' }
+    server: {
+        user: { type: Types.ObjectId, ref: 'User' },
+        updateDate: Date
+    }
 }, {
     timestamps: { createdAt: 'created_at' }
 });
