@@ -2,6 +2,8 @@ import * as express from 'express';
 import * as passport from 'passport';
 import { WordItem } from '../database/word-item.model';
 
+import { Word } from '../../../common-code/models/word';
+
 var router = express.Router();
 
 router.get('/word-items', passport.authenticate('jwt', { session: false }),
@@ -39,7 +41,7 @@ router.post('/word-items', passport.authenticate('jwt', { session: false }),
     for (let dbWord of dbWords) {
       dbWord[tagOfSameId] = false;
       for (let word of words) {
-        if (String(word._id) === String(dbWord._id)) {
+        if (Word.checkId(word, dbWord)) {
           dbWord[tagOfSameId] = true;
           word[tagOfSameId] = true;
           break;

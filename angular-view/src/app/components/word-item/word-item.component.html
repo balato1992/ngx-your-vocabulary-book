@@ -1,18 +1,40 @@
 <!--{{vItem.sentence}}-->
 <td *ngIf="highlightTexts" class="text-width margin-custom">
-    <div style="display: flex; align-items: center;">
-        <span *ngFor="let ht of highlightTexts; let i = index" attr.index="{{i}}"
-            [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
-    </div>
+    <ng-template [ngIf]="displayMode !== RowDisplayMode().Edit" [ngIfElse]="elseTempalte1">
+        <div style="display: flex; align-items: center;">
+            <span *ngFor="let ht of highlightTexts; let i = index" attr.index="{{i}}"
+                [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
+        </div>
+    </ng-template>
+    <ng-template #elseTempalte1>
+        <mat-form-field>
+            <mat-label>Sentence</mat-label>
+            <input matInput [(ngModel)]="editWord.sentence">
+        </mat-form-field>
+    </ng-template>
 </td>
-<td class="margin-custom" [style.display]="btnVisibility ? 'flex' : 'none'">
-    <button mat-icon-button color="primary" (click)="speak()">
-        <mat-icon>volume_up</mat-icon>
-    </button>
-    <button mat-icon-button color="primary" (click)="highlight()">
-        <mat-icon>highlight</mat-icon>
-    </button>
-    <button mat-icon-button color="primary" (click)="delete()">
-        <mat-icon>delete</mat-icon>
-    </button>
+
+<td class="margin-custom" [style.display]="mouseHover||displayMode === RowDisplayMode().Edit ? 'flex' : 'none'">
+    <ng-template [ngIf]="displayMode !== RowDisplayMode().Edit" [ngIfElse]="elseTempalte2">
+        <button mat-icon-button color="primary" (click)="speak()">
+            <mat-icon>volume_up</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="highlight()">
+            <mat-icon>highlight</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="edit()">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="delete()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </ng-template>
+    <ng-template #elseTempalte2>
+        <button mat-icon-button color="primary" (click)="submitEdit()">
+            <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="cancelEdit()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </ng-template>
 </td>

@@ -38,6 +38,8 @@
 
 # CHANGE LOG
 
+- 20210517
+  1. add 'word edit'
 - 20210514
   1. modify word-item component
 - 20210510

@@ -39,6 +39,12 @@ export class Word {
             return a.start - b.start;
         });
     }
+    static checkId(w1: Word, w2: Word) {
+        return String(w1._id) === String(w2._id)
+    }
+    static checkIdWithObject(w1: Word, id: Types.ObjectId) {
+        return String(w1._id) === String(id)
+    }
 }
 
 export class WordClient {

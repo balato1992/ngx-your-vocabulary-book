@@ -42,8 +42,17 @@ export class WordManagerService {
     this.wordForViews.push(wfv);
     this.store();
   }
+  public edit(word: Word) {
+
+    let index = this.wordForViews.findIndex(wfv => Word.checkId(wfv.word, word));
+    if (index >= 0) {
+
+      this.wordForViews.splice(index, 1, new WordForView(word));
+      this.store();
+    }
+  }
   public addHighlight(uid: Types.ObjectId, start: number, end: number) {
-    let item = this.wordForViews.find(item => String(item.word._id) === String(uid));
+    let item = this.wordForViews.find(item => Word.checkIdWithObject(item.word, uid));
 
     if (item !== undefined) {
       Word.addHighlight(item.word, start, end);
@@ -54,7 +63,7 @@ export class WordManagerService {
   public delete(uid: Types.ObjectId) {
 
     this.wordForViews = this.wordForViews.filter(item => {
-      return String(item.word._id) !== String(uid);
+      return !Word.checkIdWithObject(item.word, uid);
     })
     this.store();
   }

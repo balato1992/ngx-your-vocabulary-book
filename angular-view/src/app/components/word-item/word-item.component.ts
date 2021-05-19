@@ -15,16 +15,18 @@ import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog
 })
 export class WordItemComponent implements DoCheck {
   @Input() word!: Word;
-  @Input() btnVisibility: boolean = false;
-  @Input() editMode: boolean = false;
+  @Input() mouseHover: boolean = false;
+  @Input() displayMode: RowDisplayMode = RowDisplayMode.View;
 
-  @Output() editEvent = new EventEmitter<string>();
   @Output() highlightEvent = new EventEmitter<{ uid: Types.ObjectId, start: number, end: number }>();
-  @Output() deleteEvent = new EventEmitter<Types.ObjectId>();
   @Output() speakEvent = new EventEmitter<string>();
+  @Output() rowSelectedEvent = new EventEmitter<SeletionInfo>();
+  @Output() confirmEvent = new EventEmitter<ConfirmData>();
 
   highlightTexts: HighlightText[] | undefined;
   private _oldWordHighlights: Highlight[] | undefined = undefined;
+  private _oldDisplayMode: RowDisplayMode = RowDisplayMode.View;
+  editWord!: Word;
 
   constructor(public dialog: MatDialog) {
   }
@@ -37,10 +39,29 @@ export class WordItemComponent implements DoCheck {
 
       this.highlightTexts = WordForView.getHighlightText(word);
     }
+
+    if (this._oldDisplayMode !== this.displayMode) {
+      this._oldDisplayMode = this.displayMode;
+
+      if (this.displayMode === RowDisplayMode.Edit) {
+        this.editWord = JSON.parse(JSON.stringify(word));
+      }
+    }
+  }
+  RowDisplayMode(): typeof RowDisplayMode {
+    return RowDisplayMode;
   }
 
   edit() {
+    this.rowSelectedEvent.emit(new SeletionInfo(this.word, RowSelectionMode.Edit));
   }
+  cancelEdit() {
+    this.rowSelectedEvent.emit(undefined);
+  }
+  submitEdit() {
+    this.confirmEvent.emit(new ConfirmData(RowSelectionMode.Edit, this.editWord));
+  }
+
   highlight() {
     let selection = window.getSelection();
     let htis = this.highlightTexts;
@@ -91,11 +112,44 @@ export class WordItemComponent implements DoCheck {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.deleteEvent.emit(this.word._id);
+        this.confirmEvent.emit(new ConfirmData(RowSelectionMode.Delete, this.word));
       }
     });
   }
   speak() {
     this.speakEvent.emit(this.word.sentence);
+  }
+}
+
+export class SeletionInfo {
+  word: Word;
+  mode: RowSelectionMode;
+
+  constructor(word: Word, mode: RowSelectionMode) {
+    this.word = word;
+    this.mode = mode;
+  }
+}
+export enum RowSelectionMode {
+  Add = 0,
+  Edit = 1,
+  Delete = 2
+}
+export enum RowDisplayMode {
+  View = 0,
+  Disabled = 1,
+  Add = 2,
+  Edit = 3,
+  Delete = 4
+}
+export class ConfirmData {
+  mode: RowSelectionMode;
+  word: Word;
+  done: () => void;
+
+  constructor(mode: RowSelectionMode, word: Word, done: () => void = () => { }) {
+    this.mode = mode;
+    this.word = word;
+    this.done = done;
   }
 }

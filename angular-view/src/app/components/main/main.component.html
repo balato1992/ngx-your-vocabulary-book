@@ -2,7 +2,7 @@
     <mat-card>
         <mat-form-field>
             <mat-label>Sentence</mat-label>
-            <input matInput [(ngModel)]="sentence">
+            <input matInput [(ngModel)]="sentence" autocomplete="off">
         </mat-form-field>
         <button mat-flat-button color="primary" (click)="addWord()">Add</button>
 
@@ -11,9 +11,10 @@
 
         <table>
             <tr app-word-tr *ngFor="let wfv of wordForViews; let i = index" style="display: flex; height: 50px;"
-                [style.background-color]="(i%2)?'':'#eee'" [word]="wfv.word" [btnVisibility]="i==currentHoverIndex"
-                (highlightEvent)="highlightWord($event)" (deleteEvent)="deleteWord($event)" (speakEvent)="speak($event)"
-                (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
+                [style.background-color]="(i%2)?'':'#eee'" [word]="wfv.word" [mouseHover]="i==currentHoverIndex"
+                [displayMode]="getDisplayMode(wfv.word)" (highlightEvent)="highlightWord($event)"
+                (speakEvent)="speak($event)" (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()"
+                (rowSelectedEvent)="rowSelected($event)" (confirmEvent)="confirm($event)">
             </tr>
         </table>
 
