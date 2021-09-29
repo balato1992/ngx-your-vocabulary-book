@@ -6,8 +6,8 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 
 import { AuthService } from './service/auth.service';
-import { ProfileService } from './service/profile.service';
-import { UrlService } from './service/url.service';
+import { ProfileService } from './service/server/profile.service';
+import { UrlService } from './service/server/url.service';
 
 @Component({
   selector: 'app-root',

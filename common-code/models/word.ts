@@ -1,5 +1,4 @@
 import { Highlight } from './highlight';
-import { HighlightText } from '../../angular-view/src/app/class/highlight-text';
 
 import { Types } from 'mongoose';
 

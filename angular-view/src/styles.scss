@@ -1,17 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 @import './_variables.scss';
 
-@include mat-core();
+@include mat.core();
 
-@include angular-material-theme($theme);
+@include mat.all-component-themes($theme);
 
 .darkTheme {
-    @include angular-material-theme($dark-t);
+    @include mat.all-component-themes($dark-t);
 }
 
 .custom-primary {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
     color           : $primary-text;
 
     a,
@@ -34,5 +34,5 @@ body {
 }
 
 .bg-primary {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
 }

@@ -3,11 +3,7 @@ import { CONFIG } from '../config';
 
 const mongoUri = CONFIG.mongoUri;
 
-mongoose.connect(mongoUri, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(mongoUri)
     .then(() => console.log("Database Connected"))
     .catch((err) => console.log(err));
 

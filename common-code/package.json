@@ -6,7 +6,7 @@
     "start": ""
   },
   "dependencies": {
-    "mongoose": "^5.12.4"
+    "mongoose": "^6.0.8"
   },
   "devDependencies": {}
 }
