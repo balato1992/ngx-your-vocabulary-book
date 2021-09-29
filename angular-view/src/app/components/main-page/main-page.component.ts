@@ -9,9 +9,9 @@ import { WordForView } from '../../class/word-for-view';
 import { SeletionInfo, RowSelectionMode, RowDisplayMode, ConfirmData } from '../word-item/word-item.component';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  selector: 'app-main-page',
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.scss']
 })
 export class MainComponent implements OnInit {
 
