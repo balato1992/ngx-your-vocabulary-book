@@ -7,7 +7,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 
 import { AuthService } from './service/auth.service';
 import { ProfileService } from './service/server/profile.service';
-import { UrlService } from './service/server/url.service';
+import { URL } from 'src/app/app.global-variable';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,6 @@ export class AppComponent {
     private route: ActivatedRoute,
     private authService: AuthService,
     private profileService: ProfileService,
-    private urlService: UrlService,
 
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
@@ -41,11 +40,11 @@ export class AppComponent {
   }
 
   redirectToAuth() {
-    window.location.href = this.urlService.auth_google;
+    window.location.href = URL.AUTH_GOOGLE;
   }
   authLogout() {
     this.authService.logout();
-    window.location.href = this.urlService.base;
+    window.location.href = URL.BASE;
   }
 
   saveAuthTokenFromParam() {
@@ -72,7 +71,7 @@ export class AppComponent {
           this.authService.logout();
         }
 
-        window.location.replace(this.urlService.base);
+        window.location.replace(URL.BASE);
       });
   }
 

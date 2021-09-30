@@ -38,6 +38,8 @@
 
 # CHANGE LOG
 
+- 20210930
+  1. change global variable to 'app.global-variable.ts'
 - 20210517
   1. add 'word edit'
 - 20210514

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { UrlService } from './url.service';
+import { URL } from 'src/app/app.global-variable';
 import { HandleService } from './handle.service';
 
 @Injectable({
@@ -13,12 +13,11 @@ export class ProfileService {
 
     constructor(
         private http: HttpClient,
-        private urlService: UrlService,
         private handleService: HandleService) { }
 
     get(errorCallback: () => void): Observable<any> {
 
-        return this.http.get<any>(this.urlService.auth_profile)
+        return this.http.get<any>(URL.AUTH_PROFILE)
             .pipe(
                 tap(_ => this.handleService.log('fetched profile')),
                 catchError(this.handleService.handleError<any>('profile get', null, errorCallback))
