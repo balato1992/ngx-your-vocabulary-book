@@ -1,11 +1,11 @@
-import { Highlight } from './highlight';
+import { HighlightIndex } from './highlight-index';
 
 import { Types } from 'mongoose';
 
 export class Word {
     _id: Types.ObjectId;
     sentence: string;
-    highlights: Highlight[];
+    highlights: HighlightIndex[];
 
     client: WordClient;
     server: WordServer;
@@ -23,11 +23,11 @@ export class Word {
             return;
         }
 
-        let newHli = new Highlight(start, end);
+        let newHli = new HighlightIndex(start, end);
 
-        let covered: Highlight[] = [];
+        let covered: HighlightIndex[] = [];
         for (let hli of word.highlights) {
-            if (Highlight.isCover(hli, newHli)) {
+            if (HighlightIndex.isCover(hli, newHli)) {
                 covered.push(hli);
             }
         }

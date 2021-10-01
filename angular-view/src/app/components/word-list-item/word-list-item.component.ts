@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Types } from 'mongoose';
 
 import { Word } from '../../../../../common-code/models/word';
-import { Highlight } from '../../../../../common-code/models/highlight';
+import { HighlightIndex } from '../../../../../common-code/models/highlight-index';
 import { WordForView } from '../../class/word-for-view';
 import { HighlightText } from '../../class/highlight-text';
 import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog/yes-no-dialog.component';
@@ -26,7 +26,7 @@ export class WordListItemComponent implements DoCheck {
   @Output() confirmEvent = new EventEmitter<ConfirmData>();
 
   highlightTexts: HighlightText[] | undefined;
-  private _oldWordHighlights: Highlight[] | undefined = undefined;
+  private _oldWordHighlights: HighlightIndex[] | undefined = undefined;
   private _oldDisplayMode: RowDisplayMode = RowDisplayMode.View;
   editWord!: Word;
 
@@ -36,8 +36,8 @@ export class WordListItemComponent implements DoCheck {
   ngDoCheck() {
     let word = this.word;
 
-    if (this._oldWordHighlights === undefined || !Highlight.equalsForArray(this._oldWordHighlights, word.highlights)) {
-      this._oldWordHighlights = Highlight.copyArray(word.highlights);
+    if (this._oldWordHighlights === undefined || !HighlightIndex.equalsForArray(this._oldWordHighlights, word.highlights)) {
+      this._oldWordHighlights = HighlightIndex.copyArray(word.highlights);
 
       this.highlightTexts = WordForView.getHighlightText(word);
     }
