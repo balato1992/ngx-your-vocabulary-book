@@ -18,7 +18,7 @@ export class WordForView {
 
     let texts: HighlightText[] = [];
     let pushTextFunc = (start: number, end: number, hl: boolean = false) => {
-      let str = word.sentence.substring(start, end);
+      let str = word.sentence1.substring(start, end);
       //console.log("sentence:",sentence);
       //console.log("start:", start, "end:", end, "str:", str, ".");
       texts.push(new HighlightText(str, hl));
@@ -34,8 +34,8 @@ export class WordForView {
       currentIndex = h.end;
     }
 
-    if (currentIndex < word.sentence.length) {
-      pushTextFunc(currentIndex, word.sentence.length);
+    if (currentIndex < word.sentence1.length) {
+      pushTextFunc(currentIndex, word.sentence1.length);
     }
 
     return texts;

@@ -36,7 +36,8 @@ export class WordListItemComponent implements DoCheck {
   ngDoCheck() {
     let word = this.word;
 
-    if (this._oldWordHighlights === undefined || !HighlightIndex.equalsForArray(this._oldWordHighlights, word.highlights)) {
+    if (this._oldWordHighlights === undefined
+      || !HighlightIndex.equalsForArray(this._oldWordHighlights, word.highlights)) {
       this._oldWordHighlights = HighlightIndex.copyArray(word.highlights);
 
       this.highlightTexts = WordForView.getHighlightText(word);
@@ -105,7 +106,7 @@ export class WordListItemComponent implements DoCheck {
     }
   }
   delete() {
-    const text = "Delete '" + this.word.sentence + "'?"
+    const text = "Delete '" + this.word.sentence1 + "'?"
 
     const dialogRef = this.dialog.open(YesNoDialogComponent, {
       width: '250px',
@@ -119,6 +120,6 @@ export class WordListItemComponent implements DoCheck {
     });
   }
   speak() {
-    this.speakEvent.emit(this.word.sentence);
+    this.speakEvent.emit(this.word.sentence1);
   }
 }

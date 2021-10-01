@@ -3,7 +3,8 @@ import { Types } from 'mongoose';
 
 const wordItemSchema = new mongoose.Schema({
     _id: Types.ObjectId,
-    sentence: String,
+    sentence1: String,
+    sentence2: String,
     highlights: [{
         start: Number,
         end: Number

@@ -1,7 +1,7 @@
 <div style="display: flex; width: 100%">
-    <div *ngIf="highlightTexts" style="flex: auto;" class="text-width margin-custom">
+    <div style="flex: auto;" class="text-width margin-custom">
         <ng-template [ngIf]="displayMode !== RowDisplayMode().Edit" [ngIfElse]="elseTempalte1">
-            <div style="display: flex; align-items: center; height: 100%;">
+            <div *ngIf="highlightTexts" style="display: flex; align-items: center; height: 100%;">
                 <span *ngFor="let ht of highlightTexts; let i = index" attr.index="{{i}}"
                     [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
             </div>
@@ -9,7 +9,7 @@
         <ng-template #elseTempalte1>
             <mat-form-field>
                 <mat-label>Sentence/Question</mat-label>
-                <input matInput [(ngModel)]="editWord.sentence">
+                <input matInput [(ngModel)]="editWord.sentence1">
             </mat-form-field>
         </ng-template>
     </div>

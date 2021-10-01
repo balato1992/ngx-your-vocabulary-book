@@ -4,15 +4,17 @@ import { Types } from 'mongoose';
 
 export class Word {
     _id: Types.ObjectId;
-    sentence: string;
+    sentence1: string;
+    sentence2: string;
     highlights: HighlightIndex[];
 
     client: WordClient;
     server: WordServer;
 
-    constructor(sentence: string = "") {
+    constructor(sentence1: string = "",sentence2: string = "") {
         this._id = new Types.ObjectId();
-        this.sentence = sentence;
+        this.sentence1 = sentence1;
+        this.sentence2 = sentence2;
         this.highlights = [];
         this.client = new WordClient();
         this.server = new WordServer();
