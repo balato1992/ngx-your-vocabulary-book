@@ -6,7 +6,7 @@ import { WordManagerService } from '../../service/word-manager.service';
 import { WebSpeechService } from '../../service/web-speech.service';
 import { VoiceItem } from '../../class/voice-item';
 import { WordForView } from '../../class/word-for-view';
-import { SeletionInfo, RowSelectionMode, RowDisplayMode, ConfirmData } from '../word-list-item/word-list-item.component';
+import { SeletionInfo, RowSelectionMode, RowDisplayMode, ConfirmData } from '../../class/word-list-classes';
 
 @Component({
   selector: 'app-main-page',

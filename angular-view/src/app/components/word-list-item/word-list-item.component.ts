@@ -7,6 +7,8 @@ import { Highlight } from '../../../../../common-code/models/highlight';
 import { WordForView } from '../../class/word-for-view';
 import { HighlightText } from '../../class/highlight-text';
 import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog/yes-no-dialog.component';
+import { SeletionInfo, RowSelectionMode, RowDisplayMode, ConfirmData } from '../../class/word-list-classes';
+
 
 @Component({
   selector: 'app-word-list-item',
@@ -118,38 +120,5 @@ export class WordListItemComponent implements DoCheck {
   }
   speak() {
     this.speakEvent.emit(this.word.sentence);
-  }
-}
-
-export class SeletionInfo {
-  word: Word;
-  mode: RowSelectionMode;
-
-  constructor(word: Word, mode: RowSelectionMode) {
-    this.word = word;
-    this.mode = mode;
-  }
-}
-export enum RowSelectionMode {
-  Add = 0,
-  Edit = 1,
-  Delete = 2
-}
-export enum RowDisplayMode {
-  View = 0,
-  Disabled = 1,
-  Add = 2,
-  Edit = 3,
-  Delete = 4
-}
-export class ConfirmData {
-  mode: RowSelectionMode;
-  word: Word;
-  done: () => void;
-
-  constructor(mode: RowSelectionMode, word: Word, done: () => void = () => { }) {
-    this.mode = mode;
-    this.word = word;
-    this.done = done;
   }
 }
