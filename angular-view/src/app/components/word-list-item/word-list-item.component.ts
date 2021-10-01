@@ -9,11 +9,11 @@ import { HighlightText } from '../../class/highlight-text';
 import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog/yes-no-dialog.component';
 
 @Component({
-  selector: '[app-word-tr]',
-  templateUrl: './word-item.component.html',
-  styleUrls: ['./word-item.component.scss']
+  selector: 'app-word-list-item',
+  templateUrl: './word-list-item.component.html',
+  styleUrls: ['./word-list-item.component.scss']
 })
-export class WordItemComponent implements DoCheck {
+export class WordListItemComponent implements DoCheck {
   @Input() word!: Word;
   @Input() mouseHover: boolean = false;
   @Input() displayMode: RowDisplayMode = RowDisplayMode.View;

@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main-page/main-page.component';
-import { WordItemComponent } from './components/word-item/word-item.component';
+import { WordListItemComponent } from './components/word-list-item/word-list-item.component';
 import { MenuButtonComponent } from './components/menu-button/menu-button.component';
 import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
 import { ButtonMenuSelectComponent } from './components/button-menu-select/button-menu-select.component';
@@ -39,10 +39,10 @@ const matModules = [
   declarations: [
     AppComponent,
     MainComponent,
-    WordItemComponent,
+    WordListItemComponent,
     MenuButtonComponent,
     YesNoDialogComponent,
-    ButtonMenuSelectComponent
+    ButtonMenuSelectComponent,
   ],
   imports: [
     BrowserModule,

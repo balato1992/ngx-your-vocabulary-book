@@ -1,0 +1,59 @@
+<div style="display: flex; width: 100%">
+    <div *ngIf="highlightTexts" style="flex: auto;" class="text-width margin-custom">
+        <ng-template [ngIf]="displayMode !== RowDisplayMode().Edit" [ngIfElse]="elseTempalte1">
+            <div style="display: flex; align-items: center; height: 100%;">
+                <span *ngFor="let ht of highlightTexts; let i = index" attr.index="{{i}}"
+                    [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
+            </div>
+        </ng-template>
+        <ng-template #elseTempalte1>
+            <mat-form-field>
+                <mat-label>Sentence/Question</mat-label>
+                <input matInput [(ngModel)]="editWord.sentence">
+            </mat-form-field>
+        </ng-template>
+    </div>
+    <div class="margin-custom" style="align-items: center;"
+        [style.display]="mouseHover||displayMode === RowDisplayMode().Edit ? 'flex' : 'none'">
+        <ng-template [ngIf]="displayMode !== RowDisplayMode().Edit" [ngIfElse]="elseTempalte2">
+            <button mat-icon-button color="primary" (click)="speak()">
+                <mat-icon>volume_up</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="highlight()">
+                <mat-icon>highlight</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="edit()">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="delete()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </ng-template>
+        <ng-template #elseTempalte2>
+            <button mat-icon-button color="primary" (click)="submitEdit()">
+                <mat-icon>done</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="cancelEdit()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </ng-template>
+    </div>
+</div>
+
+<!--
+<div style="flex: 1 1 auto; cursor: pointer; background: red; display: flex;">
+    <span>
+        <mat-icon>expand_more</mat-icon>
+        <mat-icon>expand_less</mat-icon>
+    </span>
+    <div>123sresr ftyft ff yt f yt fyt fytf y t ftt</div>
+</div>
+<button mat-icon-button>
+    <mat-icon>info</mat-icon>
+</button>
+<button mat-icon-button>
+    <mat-icon>info</mat-icon>
+</button>
+<button mat-icon-button>
+    <mat-icon>info</mat-icon>
+</button>-->
