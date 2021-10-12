@@ -109,7 +109,7 @@ export class MainComponent implements OnInit {
 
     if (selection?.word !== undefined
       && selection?.mode !== undefined
-      && (this.seletionInfo?.word !== selection.word)
+      && (this.seletionInfo?.word !== selection.word) // select again
     ) {
       this.seletionInfo = selection;
     } else {

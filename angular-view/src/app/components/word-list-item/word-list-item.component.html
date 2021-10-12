@@ -1,21 +1,37 @@
 <div style="display: flex; width: 100%">
     <div style="flex: auto;" class="text-width margin-custom">
-        <ng-template [ngIf]="displayMode !== RowDisplayMode().Edit" [ngIfElse]="elseTempalte1">
+        <ng-container *ngIf="displayMode === RowDisplayMode().Add; else editTempalte1">
+        </ng-container>
+        <ng-template #editTempalte1>
+            <ng-container *ngIf="displayMode === RowDisplayMode().Edit; else viewTempalte1">
+                <mat-form-field>
+                    <mat-label>Sentence/Question</mat-label>
+                    <input matInput [(ngModel)]="editWord.sentence1">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Sentence/Question</mat-label>
+                    <input matInput [(ngModel)]="editWord.sentence2">
+                </mat-form-field>
+            </ng-container>
+        </ng-template>
+        <ng-template #viewTempalte1>
             <div *ngIf="highlightTexts" style="display: flex; align-items: center; height: 100%;">
                 <span *ngFor="let ht of highlightTexts; let i = index" attr.index="{{i}}"
                     [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
             </div>
         </ng-template>
-        <ng-template #elseTempalte1>
-            <mat-form-field>
-                <mat-label>Sentence/Question</mat-label>
-                <input matInput [(ngModel)]="editWord.sentence1">
-            </mat-form-field>
-        </ng-template>
     </div>
     <div class="margin-custom" style="align-items: center;"
         [style.display]="mouseHover||displayMode === RowDisplayMode().Edit ? 'flex' : 'none'">
-        <ng-template [ngIf]="displayMode !== RowDisplayMode().Edit" [ngIfElse]="elseTempalte2">
+        <ng-container *ngIf="displayMode === RowDisplayMode().Add || displayMode === RowDisplayMode().Edit; else viewTempalte2">
+            <button mat-icon-button color="primary" (click)="submitEdit()">
+                <mat-icon>done</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="cancelEdit()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </ng-container>
+        <ng-template #viewTempalte2>
             <button mat-icon-button color="primary" (click)="speak()">
                 <mat-icon>volume_up</mat-icon>
             </button>
@@ -27,14 +43,6 @@
             </button>
             <button mat-icon-button color="primary" (click)="delete()">
                 <mat-icon>delete</mat-icon>
-            </button>
-        </ng-template>
-        <ng-template #elseTempalte2>
-            <button mat-icon-button color="primary" (click)="submitEdit()">
-                <mat-icon>done</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="cancelEdit()">
-                <mat-icon>close</mat-icon>
             </button>
         </ng-template>
     </div>

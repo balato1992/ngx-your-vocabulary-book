@@ -13,3 +13,11 @@ Add some sentences or Q&A you want and the data will show below you can review t
 - login
   - jwt auth
 - google auth
+
+## user
+
+- 僅作為複習使用、請勿儲存重要資料 或用作非法用途
+- Data
+  - save in mongo
+  - can remove all user data
+  - export data

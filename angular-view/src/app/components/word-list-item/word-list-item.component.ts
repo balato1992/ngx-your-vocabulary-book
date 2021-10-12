@@ -46,6 +46,8 @@ export class WordListItemComponent implements DoCheck {
     if (this._oldDisplayMode !== this.displayMode) {
       this._oldDisplayMode = this.displayMode;
 
+      if (this.displayMode === RowDisplayMode.Add) {
+      }
       if (this.displayMode === RowDisplayMode.Edit) {
         this.editWord = JSON.parse(JSON.stringify(word));
       }
