@@ -59,29 +59,29 @@ export class MainComponent implements OnInit {
   }
 
   getDisplayMode(word: Word) {
-    let currentType = RowDisplayMode.View;
+    let mode = RowDisplayMode.View;
 
     if (this.seletionInfo !== undefined) {
       if (this.seletionInfo.word === word) {
         switch (this.seletionInfo.mode) {
           case RowSelectionMode.Add:
-            currentType = RowDisplayMode.Add;
+            mode = RowDisplayMode.Add;
             break;
           case RowSelectionMode.Edit:
-            currentType = RowDisplayMode.Edit;
+            mode = RowDisplayMode.Edit;
             break;
           case RowSelectionMode.Delete:
-            currentType = RowDisplayMode.Delete;
+            mode = RowDisplayMode.Delete;
             break;
           default:
             break;
         }
       } else {
-        currentType = RowDisplayMode.Disabled;
+        mode = RowDisplayMode.Disabled;
       }
     }
 
-    return currentType;
+    return mode;
   }
 
 

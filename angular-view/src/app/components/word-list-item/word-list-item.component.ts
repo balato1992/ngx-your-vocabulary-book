@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit, OnChanges, DoCheck, EventEmitter, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { animate, animateChild, group, query, state, style, transition, trigger } from '@angular/animations';
 import { Types } from 'mongoose';
 
 import { Word } from '../../../../../common-code/models/word';
@@ -13,9 +14,36 @@ import { SeletionInfo, RowSelectionMode, RowDisplayMode, ConfirmData } from '../
 @Component({
   selector: 'app-word-list-item',
   templateUrl: './word-list-item.component.html',
-  styleUrls: ['./word-list-item.component.scss']
+  styleUrls: ['./word-list-item.component.scss'],
+  animations: [
+    trigger(
+      'fade', [
+      transition(':enter', [
+        style({
+          'grid-row-start': 1,
+          'grid-column-start': 1,
+          'margin-left': 'auto',
+          opacity: 0,
+          'pointer-events': 'none'
+        }),
+        animate('500ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({
+          'grid-row-start': 1,
+          'grid-column-start': 1,
+          'margin-left': 'auto',
+          opacity: 1,
+          'pointer-events': 'none'
+        }),
+        animate('500ms', style({ opacity: 0 })),
+      ]),
+    ]),
+  ]
 })
 export class WordListItemComponent implements DoCheck {
+  get GetRowDisplayMode(): typeof RowDisplayMode { return RowDisplayMode; }
+
   @Input() word!: Word;
   @Input() mouseHover: boolean = false;
   @Input() displayMode: RowDisplayMode = RowDisplayMode.View;
@@ -53,9 +81,7 @@ export class WordListItemComponent implements DoCheck {
       }
     }
   }
-  RowDisplayMode(): typeof RowDisplayMode {
-    return RowDisplayMode;
-  }
+
 
   edit() {
     this.rowSelectedEvent.emit(new SeletionInfo(this.word, RowSelectionMode.Edit));
@@ -67,7 +93,7 @@ export class WordListItemComponent implements DoCheck {
   submitEdit() {
     this.confirmEvent.emit(new ConfirmData(RowSelectionMode.Edit, this.editWord));
   }
-  
+
   delete() {
     const text = "Delete '" + this.word.sentence1 + "'?"
 
@@ -127,4 +153,6 @@ export class WordListItemComponent implements DoCheck {
   speak() {
     this.speakEvent.emit(this.word.sentence1);
   }
+
+
 }

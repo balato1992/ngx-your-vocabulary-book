@@ -1,9 +1,9 @@
 <div style="display: flex; width: 100%">
     <div style="flex: auto;" class="text-width margin-custom">
-        <ng-container *ngIf="displayMode === RowDisplayMode().Add; else editTempalte1">
+        <ng-container *ngIf="displayMode === GetRowDisplayMode.Add; else editTempalte1">
         </ng-container>
         <ng-template #editTempalte1>
-            <ng-container *ngIf="displayMode === RowDisplayMode().Edit; else viewTempalte1">
+            <ng-container *ngIf="displayMode === GetRowDisplayMode.Edit; else viewTempalte1">
                 <mat-form-field>
                     <mat-label>Sentence/Question</mat-label>
                     <input matInput [(ngModel)]="editWord.sentence1">
@@ -22,28 +22,33 @@
         </ng-template>
     </div>
     <div class="margin-custom" style="align-items: center;"
-        [style.display]="mouseHover||displayMode === RowDisplayMode().Edit ? 'flex' : 'none'">
-        <ng-container *ngIf="displayMode === RowDisplayMode().Add || displayMode === RowDisplayMode().Edit; else viewTempalte2">
-            <button mat-icon-button color="primary" (click)="submitEdit()">
-                <mat-icon>done</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="cancelEdit()">
-                <mat-icon>close</mat-icon>
-            </button>
+        [style.display]="mouseHover||displayMode === GetRowDisplayMode.Edit ? 'grid' : 'none'">
+        <ng-container
+            *ngIf="displayMode === GetRowDisplayMode.Add || displayMode === GetRowDisplayMode.Edit; else viewTempalte2">
+            <div [@fade]>
+                <button mat-icon-button color="primary" (click)="submitEdit()">
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="cancelEdit()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
         </ng-container>
         <ng-template #viewTempalte2>
-            <button mat-icon-button color="primary" (click)="speak()">
-                <mat-icon>volume_up</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="highlight()">
-                <mat-icon>highlight</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="edit()">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="delete()">
-                <mat-icon>delete</mat-icon>
-            </button>
+            <div [@fade]>
+                <button mat-icon-button color="primary" (click)="speak()">
+                    <mat-icon>volume_up</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="highlight()">
+                    <mat-icon>highlight</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="edit()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="delete()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
         </ng-template>
     </div>
 </div>
