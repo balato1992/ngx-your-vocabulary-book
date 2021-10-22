@@ -60,12 +60,29 @@ export class WordListItemComponent implements DoCheck {
   edit() {
     this.rowSelectedEvent.emit(new SeletionInfo(this.word, RowSelectionMode.Edit));
   }
+
   cancelEdit() {
     this.rowSelectedEvent.emit(undefined);
   }
   submitEdit() {
     this.confirmEvent.emit(new ConfirmData(RowSelectionMode.Edit, this.editWord));
   }
+  
+  delete() {
+    const text = "Delete '" + this.word.sentence1 + "'?"
+
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      width: '250px',
+      data: new YesNoDialogComponentData('Confirm Deletion', text)
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.confirmEvent.emit(new ConfirmData(RowSelectionMode.Delete, this.word));
+      }
+    });
+  }
+
 
   highlight() {
     let selection = window.getSelection();
@@ -106,20 +123,6 @@ export class WordListItemComponent implements DoCheck {
         selection.removeAllRanges();
       }
     }
-  }
-  delete() {
-    const text = "Delete '" + this.word.sentence1 + "'?"
-
-    const dialogRef = this.dialog.open(YesNoDialogComponent, {
-      width: '250px',
-      data: new YesNoDialogComponentData('Confirm Deletion', text)
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.confirmEvent.emit(new ConfirmData(RowSelectionMode.Delete, this.word));
-      }
-    });
   }
   speak() {
     this.speakEvent.emit(this.word.sentence1);
