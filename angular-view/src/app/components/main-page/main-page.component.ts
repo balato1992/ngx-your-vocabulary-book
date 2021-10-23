@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Types } from 'mongoose';
 
 import { Word } from '../../../../../common-code/models/word';
 import { WordManagerService } from '../../service/word-manager.service';
 import { WebSpeechService } from '../../service/web-speech.service';
 import { VoiceItem } from '../../class/voice-item';
-import { WordForView } from '../../class/word-for-view';
 import { SeletionInfo, RowSelectionMode, RowDisplayMode, ConfirmData } from '../../class/word-list-classes';
+import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog/yes-no-dialog.component';
 
 @Component({
   selector: 'app-main-page',
@@ -15,8 +16,8 @@ import { SeletionInfo, RowSelectionMode, RowDisplayMode, ConfirmData } from '../
 })
 export class MainComponent implements OnInit {
 
-  sentence: string = "";
-  wordForViews: WordForView[] = [];
+  addTheWord: Word | undefined;
+  words: Word[] = [];
   currentHoverIndex: number = -1;
 
   voiceItems: VoiceItem[] = [];
@@ -26,10 +27,11 @@ export class MainComponent implements OnInit {
 
   constructor(
     private wordManagerService: WordManagerService,
-    private webSpeechService: WebSpeechService) { }
+    private webSpeechService: WebSpeechService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getWords();
+    this.getWordsFromService();
 
     this.initVoices();
     this.webSpeechService.voicesChangedEvent.subscribe((o) => {
@@ -58,6 +60,7 @@ export class MainComponent implements OnInit {
     }
   }
 
+
   getDisplayMode(word: Word) {
     let mode = RowDisplayMode.View;
 
@@ -83,47 +86,39 @@ export class MainComponent implements OnInit {
 
     return mode;
   }
+  getWordsForView(): Word[] {
+    let words = [];
+
+    if (this.addTheWord !== undefined) {
+      words.push(this.addTheWord);
+    }
+
+    return words.concat(this.words);
+  }
 
 
-  getWords(): void {
+
+  getWordsFromService(): void {
     this.wordManagerService.get()
-      .subscribe(viewItems => this.wordForViews = viewItems);
+      .subscribe(viewItems => this.words = viewItems);
   }
-  addWord(): void {
-    this.wordManagerService.add(this.sentence);
-    this.getWords();
-    this.sentence = "";
+  newaddWord(): void {
+    this.addTheWord = new Word();
+    this.rowSelected(new SeletionInfo(this.addTheWord, RowSelectionMode.Add));
   }
+
+
   highlightWord(obj: { uid: Types.ObjectId, start: number, end: number }): void {
     this.wordManagerService.addHighlight(obj.uid, obj.start, obj.end);
-    this.getWords();
-  }
-  speak(text: string) {
-
-    if (this.selectedVoiceItem !== undefined) {
-
-      this.webSpeechService.speak(text, this.selectedVoiceItem.name);
-    }
-  }
-  rowSelected(selection: SeletionInfo) {
-
-    if (selection?.word !== undefined
-      && selection?.mode !== undefined
-      && (this.seletionInfo?.word !== selection.word) // select again
-    ) {
-      this.seletionInfo = selection;
-    } else {
-      this.seletionInfo = undefined;
-    }
+    this.getWordsFromService();
   }
   confirm(data: ConfirmData) {
 
     try {
       switch (data.mode) {
-        // TODO
-        /*case RowSelectionMode.Add:
-          this.wordManagerService.add(data.word);
-          break;*/
+        case RowSelectionMode.Add:
+          this.wordManagerService.newadd(data.word);
+          break;
         case RowSelectionMode.Edit:
           this.wordManagerService.edit(data.word);
           break;
@@ -142,20 +137,53 @@ export class MainComponent implements OnInit {
       alert("發生錯誤: 0012");
     }
 
+    this.addTheWord = undefined;
     this.seletionInfo = undefined;
-    this.getWords();
+    this.getWordsFromService();
   }
+  rowSelected(selection: SeletionInfo) {
+
+    if (selection?.word !== undefined
+      && selection?.mode !== undefined
+      && (this.seletionInfo?.word !== selection.word) // select again
+    ) {
+      this.seletionInfo = selection;
+    } else {
+      this.addTheWord = undefined;
+      this.seletionInfo = undefined;
+    }
+  }
+  speak(text: string) {
+
+    if (this.selectedVoiceItem !== undefined) {
+
+      this.webSpeechService.speak(text, this.selectedVoiceItem.name);
+    }
+  }
+
 
   manualSync(): void {
 
     this.wordManagerService.manualSync(() => {
-      this.getWords();
+      this.getWordsFromService();
     });
   }
   clearItem(): void {
-    this.wordManagerService.clear();
-    this.getWords();
+    const text = "Clear all data?"
+
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      width: '250px',
+      data: new YesNoDialogComponentData('Confirm Deletion', text)
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.wordManagerService.clear();
+        this.getWordsFromService();
+      }
+    });
   }
+
 
   mouseEnter(index: number) {
     this.currentHoverIndex = index;

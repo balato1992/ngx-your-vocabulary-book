@@ -1,22 +1,16 @@
 <div style="max-width: 940px; margin: 22px auto;">
     <mat-card>
 
-
-        <mat-form-field>
-            <mat-label>Sentence/Question</mat-label>
-            <input matInput [(ngModel)]="sentence" autocomplete="off">
-        </mat-form-field>
-        <button mat-flat-button color="primary" (click)="addWord()">Add</button>
-
+        <button mat-flat-button color="primary" style="margin: 8px" (click)="newaddWord()">Add</button>
 
         <app-button-menu-select [voiceItems]="voiceItems" [selectedItem]="selectedVoiceItem"
             (selectItemChanged)="selectedVoiceItem = $event"></app-button-menu-select>
 
 
         <div>
-            <app-word-list-item *ngFor="let wfv of wordForViews; let i = index" style="display: flex; height: 50px;"
-                [style.background-color]="(i%2)?'':'#eee'" [word]="wfv.word" [mouseHover]="i==currentHoverIndex"
-                [displayMode]="getDisplayMode(wfv.word)" (highlightEvent)="highlightWord($event)"
+            <app-word-list-item *ngFor="let word of getWordsForView(); let i = index" style="display: flex;"
+                [style.background-color]="(i%2)?'':'#eee'" [word]="word" [mouseHover]="i==currentHoverIndex"
+                [displayMode]="getDisplayMode(word)" (highlightEvent)="highlightWord($event)"
                 (speakEvent)="speak($event)" (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()"
                 (rowSelectedEvent)="rowSelected($event)" (confirmEvent)="confirm($event)">
             </app-word-list-item>
@@ -25,11 +19,7 @@
         <br>
         <br>
         <br>
-        <button mat-flat-button color="primary" (click)="manualSync()">sync</button>
-        <br>
-        <br>
-        <br>
-        <br>
-        <button mat-flat-button color="primary" (click)="clearItem()">Clear</button>
+        <button mat-flat-button color="primary" style="margin: 8px" (click)="manualSync()">sync</button>
+        <button mat-flat-button color="primary" style="margin: 8px" (click)="clearItem()">Clear</button>
     </mat-card>
 </div>

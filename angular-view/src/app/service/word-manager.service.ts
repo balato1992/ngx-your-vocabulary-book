@@ -12,78 +12,65 @@ import { Word } from '../../../../common-code/models/word';
 })
 // TODO: try catch errors, keep data is correct
 export class WordManagerService {
-  private wordForViews: WordForView[];
+  private words: Word[];
 
   constructor(private wordItemsService: WordItemsService) {
     let words = StorageManager.retrieve();
 
-    let wfvs: WordForView[] = [];
-    for (let word of words) {
-      wfvs.push(new WordForView(word));
-    }
-    this.wordForViews = wfvs;
+    this.words = words;
   }
 
   public store() {
 
-    let words: Word[] = this.wordForViews.map(vi => vi.word);
-
-    StorageManager.store(words);
+    StorageManager.store(this.words);
   }
 
-  public get(): Observable<WordForView[]> {
-    return of(this.wordForViews);
+  public get(): Observable<Word[]> {
+    return of(this.words);
   }
-
-  public add(sentence: string) {
-    let word = new Word(sentence);
-    let wfv = new WordForView(word);
-
-    this.wordForViews.push(wfv);
+  public newadd(word: Word) {
+    this.words.unshift(word);
     this.store();
   }
   public edit(word: Word) {
 
-    let index = this.wordForViews.findIndex(wfv => Word.checkId(wfv.word, word));
+    let index = this.words.findIndex(w => Word.checkId(w, word));
     if (index >= 0) {
 
-      this.wordForViews.splice(index, 1, new WordForView(word));
+      this.words.splice(index, 1, word);
       this.store();
     }
   }
   public addHighlight(uid: Types.ObjectId, start: number, end: number) {
-    let item = this.wordForViews.find(item => Word.checkIdWithObject(item.word, uid));
+    let find = this.words.find(word => Word.checkIdWithObject(word, uid));
 
-    if (item !== undefined) {
-      Word.addHighlight(item.word, start, end);
-      item.refresh();
+    if (find !== undefined) {
+      Word.addHighlight(find, start, end);
       this.store();
     }
   }
   public delete(uid: Types.ObjectId) {
 
-    this.wordForViews = this.wordForViews.filter(item => {
-      return !Word.checkIdWithObject(item.word, uid);
+    this.words = this.words.filter(word => {
+      return !Word.checkIdWithObject(word, uid);
     })
     this.store();
   }
 
   public clear() {
-    this.wordForViews = [];
+    this.words = [];
     this.store();
   }
 
 
   public manualSync(callback: () => void) {
 
-    let words = this.wordForViews.map(o => o.word);
-
-    this.wordItemsService.post(words).subscribe(result => {
+    this.wordItemsService.post(this.words).subscribe(result => {
 
       if (result === "success") {
-        this.wordItemsService.get().subscribe(result => {
+        this.wordItemsService.get().subscribe((result: Word[]) => {
 
-          this.wordForViews = WordForView.createWordForViews(result);
+          this.words = result;
           this.store();
 
           callback();

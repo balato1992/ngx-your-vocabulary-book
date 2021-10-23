@@ -11,7 +11,7 @@ export class Word {
     client: WordClient;
     server: WordServer;
 
-    constructor(sentence1: string = "",sentence2: string = "") {
+    constructor(sentence1: string = "", sentence2: string = "") {
         this._id = new Types.ObjectId();
         this.sentence1 = sentence1;
         this.sentence2 = sentence2;
@@ -34,11 +34,13 @@ export class Word {
             }
         }
 
-        word.highlights = word.highlights.filter(hl => !covered.includes(hl));
-        word.highlights.push(newHli);
-        word.highlights.sort((a, b) => {
+        let tmpHighlights = word.highlights.filter(hl => !covered.includes(hl));
+        tmpHighlights.push(newHli);
+        tmpHighlights.sort((a, b) => {
             return a.start - b.start;
         });
+
+        word.highlights = tmpHighlights;
     }
     static checkId(w1: Word, w2: Word) {
         return String(w1._id) === String(w2._id)

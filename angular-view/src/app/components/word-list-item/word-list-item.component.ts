@@ -57,6 +57,7 @@ export class WordListItemComponent implements DoCheck {
   private _oldWordHighlights: HighlightIndex[] | undefined = undefined;
   private _oldDisplayMode: RowDisplayMode = RowDisplayMode.View;
   editWord!: Word;
+  expansion: boolean = false;
 
   constructor(public dialog: MatDialog) {
   }
@@ -64,8 +65,7 @@ export class WordListItemComponent implements DoCheck {
   ngDoCheck() {
     let word = this.word;
 
-    if (this._oldWordHighlights === undefined
-      || !HighlightIndex.equalsForArray(this._oldWordHighlights, word.highlights)) {
+    if (this._oldWordHighlights === undefined || !HighlightIndex.equalsForArray(this._oldWordHighlights, word.highlights)) {
       this._oldWordHighlights = HighlightIndex.copyArray(word.highlights);
 
       this.highlightTexts = WordForView.getHighlightText(word);
@@ -74,12 +74,16 @@ export class WordListItemComponent implements DoCheck {
     if (this._oldDisplayMode !== this.displayMode) {
       this._oldDisplayMode = this.displayMode;
 
-      if (this.displayMode === RowDisplayMode.Add) {
-      }
-      if (this.displayMode === RowDisplayMode.Edit) {
+      if (this.getIfEditing()) {
         this.editWord = JSON.parse(JSON.stringify(word));
       }
+      else if (this.displayMode === RowDisplayMode.View) {
+        this.expansion = false;
+      }
     }
+  }
+  getIfEditing(): boolean {
+    return this.displayMode === RowDisplayMode.Add || this.displayMode === RowDisplayMode.Edit;
   }
 
 
@@ -91,7 +95,13 @@ export class WordListItemComponent implements DoCheck {
     this.rowSelectedEvent.emit(undefined);
   }
   submitEdit() {
-    this.confirmEvent.emit(new ConfirmData(RowSelectionMode.Edit, this.editWord));
+
+    if (this.displayMode === RowDisplayMode.Add) {
+      this.confirmEvent.emit(new ConfirmData(RowSelectionMode.Add, this.editWord));
+    }
+    else if (this.displayMode === RowDisplayMode.Edit) {
+      this.confirmEvent.emit(new ConfirmData(RowSelectionMode.Edit, this.editWord));
+    }
   }
 
   delete() {
@@ -153,6 +163,5 @@ export class WordListItemComponent implements DoCheck {
   speak() {
     this.speakEvent.emit(this.word.sentence1);
   }
-
 
 }
