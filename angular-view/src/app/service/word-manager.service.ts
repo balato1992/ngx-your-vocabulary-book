@@ -5,7 +5,7 @@ import { Types } from 'mongoose';
 import { WordForView } from '../class/word-for-view';
 import { WordItemsService } from '../service/server/word-items.service';
 
-import { Word } from '../../../../common-code/models/word';
+import { Word } from '../../../../express-server/src/shared/word';
 
 @Injectable({
   providedIn: 'root'

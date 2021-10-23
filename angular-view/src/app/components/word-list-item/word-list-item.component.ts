@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { animate, animateChild, group, query, state, style, transition, trigger } from '@angular/animations';
 import { Types } from 'mongoose';
 
-import { Word } from '../../../../../common-code/models/word';
-import { HighlightIndex } from '../../../../../common-code/models/highlight-index';
+import { Word } from '../../../../../express-server/src/shared/word';
+import { HighlightIndex } from '../../../../../express-server/src/shared/highlight-index';
 import { WordForView } from '../../class/word-for-view';
 import { HighlightText } from '../../class/highlight-text';
 import { YesNoDialogComponent, YesNoDialogComponentData } from '../yes-no-dialog/yes-no-dialog.component';

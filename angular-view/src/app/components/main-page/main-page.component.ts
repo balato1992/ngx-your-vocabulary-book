@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Types } from 'mongoose';
 
-import { Word } from '../../../../../common-code/models/word';
+import { Word } from '../../../../../express-server/src/shared/word';
 import { WordManagerService } from '../../service/word-manager.service';
 import { WebSpeechService } from '../../service/web-speech.service';
 import { VoiceItem } from '../../class/voice-item';

@@ -1,4 +1,4 @@
-import { Word } from '../../../../common-code/models/word';
+import { Word } from '../../../../express-server/src/shared/word';
 import { HighlightText } from './highlight-text';
 
 export class WordForView {

@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as passport from 'passport';
 import { WordItem } from '../database/word-item.model';
 
-import { Word } from '../../../common-code/models/word';
+import { Word } from '../shared/word';
 
 var router = express.Router();
 
@@ -49,9 +49,7 @@ router.post('/word-items', passport.authenticate('jwt', { session: false }),
       }
     }
 
-    let deleteList = dbWords.filter(w => {
-      return w[tagOfSameId] !== true;
-    });
+    let deleteList = dbWords.filter(w => w[tagOfSameId] !== true);
     console.log('----deleteList');
     console.log(deleteList);
     deleteList.forEach(async w => {

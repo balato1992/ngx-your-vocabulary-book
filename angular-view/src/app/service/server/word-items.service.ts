@@ -6,7 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { URL } from 'src/app/app.global-variable';
 import { HandleService } from './handle.service';
 
-import { Word } from '../../../../../common-code/models/word';
+import { Word } from '../../../../../express-server/src/shared/word';
 
 @Injectable({
     providedIn: 'root'
