@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Types } from 'mongoose';
 
-import { WordForView } from '../class/word-for-view';
 import { WordItemsService } from '../service/server/word-items.service';
-
-import { Word } from '../../../../express-server/src/shared/word';
+import { Word, WordClient } from '../../../../express-server/src/shared/word';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +24,16 @@ export class WordManagerService {
   }
 
   public get(): Observable<Word[]> {
-    return of(this.words);
+
+    return of(this.words.filter(w => w.client.isDeleted === false));
   }
   public newadd(word: Word) {
+    word.client.isNew = true;
     this.words.unshift(word);
     this.store();
   }
   public edit(word: Word) {
+    word.client.isUpdate = true;
 
     let index = this.words.findIndex(w => Word.checkId(w, word));
     if (index >= 0) {
@@ -45,15 +46,26 @@ export class WordManagerService {
     let find = this.words.find(word => Word.checkIdWithObject(word, uid));
 
     if (find !== undefined) {
+      find.client.isUpdate = true;
+
       Word.addHighlight(find, start, end);
       this.store();
     }
   }
   public delete(uid: Types.ObjectId) {
 
+    let find = this.words.find(word => Word.checkIdWithObject(word, uid));
+
+    if (find !== undefined) {
+      find.client.isDeleted = true;
+    }
+
+    /*
     this.words = this.words.filter(word => {
       return !Word.checkIdWithObject(word, uid);
     })
+    */
+
     this.store();
   }
 
@@ -69,6 +81,10 @@ export class WordManagerService {
 
       if (result === "success") {
         this.wordItemsService.get().subscribe((result: Word[]) => {
+
+          for (let word of result) {
+            word.client = new WordClient();
+          }
 
           this.words = result;
           this.store();

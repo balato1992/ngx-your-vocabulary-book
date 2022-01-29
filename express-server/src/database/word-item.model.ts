@@ -11,11 +11,14 @@ const wordItemSchema = new mongoose.Schema({
     }],
 
     server: {
-        user: { type: Types.ObjectId, ref: 'User' },
-        updateDate: Date
+        userId: { type: Types.ObjectId, ref: 'User' },
+        isDeleted: Boolean,
     }
 }, {
-    timestamps: { createdAt: 'created_at' }
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
+    }
 });
 
 let WordItem = mongoose.model('WordItem', wordItemSchema);

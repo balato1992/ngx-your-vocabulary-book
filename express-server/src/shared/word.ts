@@ -54,19 +54,21 @@ export class WordClient {
 
     isNew: boolean;
     isUpdate: boolean;
+    isDeleted: boolean;
 
-    constructor(isNew: boolean = false) {
-        this.isNew = isNew;
+    constructor() {
+        this.isNew = false;
         this.isUpdate = false;
+        this.isDeleted = false;
     }
 }
 export class WordServer {
 
-    user: string | null;
-    updateDate: Date | null;
+    userId: string | null;
+    isDeleted: boolean| null;
 
     constructor() {
-        this.user = null;
-        this.updateDate = null;
+        this.userId = null;
+        this.isDeleted = null;
     }
 }

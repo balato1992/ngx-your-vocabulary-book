@@ -10,7 +10,12 @@ router.get('/word-items', passport.authenticate('jwt', { session: false }),
   (req: any, res) => {
     let userId = req.user._id;
 
-    WordItem.find({ user: userId }).
+    WordItem.find({
+      $and: [
+        { user: userId },
+        { "server.isDeleted": false }
+      ]
+    }).
       //populate('user').
       exec()
       .then(wordItems => {
@@ -28,7 +33,7 @@ router.post('/word-items', passport.authenticate('jwt', { session: false }),
     console.log(req.body);
 
     let userId = req.user._id;
-    let words: Array<any> = req.body;
+    let words: Word[] = req.body;
 
     let dbWords: any = await WordItem.find({ user: userId }).
       exec()
@@ -38,37 +43,46 @@ router.post('/word-items', passport.authenticate('jwt', { session: false }),
 
     let tagOfSameId = '_tagOfSameId';
 
+    let deleteList = [];
+
     for (let dbWord of dbWords) {
       dbWord[tagOfSameId] = false;
+
       for (let word of words) {
         if (Word.checkId(word, dbWord)) {
           dbWord[tagOfSameId] = true;
           word[tagOfSameId] = true;
+
+          if (word.client.isDeleted == true) {
+            deleteList.push(word._id);
+          }
+
           break;
         }
       }
     }
-
-    let deleteList = dbWords.filter(w => w[tagOfSameId] !== true);
     console.log('----deleteList');
     console.log(deleteList);
-    deleteList.forEach(async w => {
-      await WordItem.deleteOne({ _id: w._id }).exec();
+    deleteList.forEach(async id => {
+      await WordItem.deleteOne({ _id: id }).exec();
     });
 
-    let createList = words.filter(w => {
-      return w[tagOfSameId] !== true;
-    });
+    let createList = [];
+    let updateList = [];
+    for (let word of words) {
+      if (word.client.isNew == true) {
+        createList.push(word);
+      }
+      if (word.client.isUpdate == true) {
+        updateList.push(word);
+      }
+    }
     console.log('----createList');
     console.log(createList);
     createList.forEach(async w => {
-      w.user = userId;
+      w.server.userId = userId;
+      w.server.isDeleted = false;
       await WordItem.create(w);
-    });
-
-    let updateList = words.filter(w => {
-      // check same data
-      return w[tagOfSameId] === true;
     });
     console.log('----updateList');
     console.log(updateList);
@@ -84,7 +98,8 @@ router.post('/word-items', passport.authenticate('jwt', { session: false }),
       return WordItem.create(items, { session: session });
     });
 
-    session.endSession();*/
+    session.endSession();
+    */
 
     res.status(200).json('success');
   });

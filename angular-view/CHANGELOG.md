@@ -1,6 +1,7 @@
 
 # TODO
 
+- sort order
 - check Interceptor
 - speech synthesis
   - speaking animation and hint
