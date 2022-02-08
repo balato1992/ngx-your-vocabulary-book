@@ -1,4 +1,4 @@
-<button mat-button color="primary" [matMenuTriggerFor]="menu">
+<button *ngIf="voiceItems != null && voiceItems.length > 0" mat-button color="primary" [matMenuTriggerFor]="menu">
     {{ (selectedItem)? selectedItem.text : "--" }}
     <mat-icon>arrow_drop_down</mat-icon>
 </button>
