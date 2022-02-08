@@ -28,6 +28,8 @@
 - translate
 - aria-label
 
+- SpeechSynthesis voices name in pc and in phone is different
+
 # DONE
 
 - sentence

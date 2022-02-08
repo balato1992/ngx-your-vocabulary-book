@@ -41,9 +41,11 @@ export class WebSpeechService {
         else return +1;
       });
 
-      const avalibleLang = ["zh-TW", "en-US", "ja-JP"];
+      // 20220209: SpeechSynthesis voices name at pc and at phone is different
+      let availableLang = ["zh-TW", "en-US", "ja-JP"];
+      availableLang = availableLang.concat(availableLang.map(i => i.replace("-", "_")));
 
-      voices = voices.filter(voice => avalibleLang.includes(voice.lang));
+      voices = voices.filter(voice => availableLang.includes(voice.lang));
 
       this.voices = voices;
     };
