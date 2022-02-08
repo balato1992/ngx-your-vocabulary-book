@@ -13,14 +13,14 @@ export class WordManagerService {
   private words: Word[];
 
   constructor(private wordItemsService: WordItemsService) {
-    let words = StorageManager.retrieve();
+    let words = StorageManager.retrieveWords();
 
     this.words = words;
   }
 
   public store() {
 
-    StorageManager.store(this.words);
+    StorageManager.storeWords(this.words);
   }
 
   public get(): Observable<Word[]> {
@@ -98,21 +98,20 @@ export class WordManagerService {
 
 class StorageManager {
 
-  private static cloudVersionKey = 'vocabularyitems';
+  private static cloudVersionKey = 'vocabulary-cloudVersionKey';
   private static dataKey = 'vocabularyitems';
 
   public static storeCloudVersion(version: string) {
     localStorage.setItem(this.cloudVersionKey, version);
   }
   public static retrieveCloudVersion(): string {
-    return localStorage.getItem(this.dataKey) ?? "";
+    return localStorage.getItem(this.cloudVersionKey) ?? "";
   }
 
-  public static store(words: Word[]) {
+  public static storeWords(words: Word[]) {
     localStorage.setItem(this.dataKey, JSON.stringify(words));
   }
-
-  public static retrieve(): Word[] {
+  public static retrieveWords(): Word[] {
     let json = localStorage.getItem(this.dataKey);
 
     return (json) ? JSON.parse(json) : [];
