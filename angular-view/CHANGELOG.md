@@ -19,6 +19,7 @@
 - review feature (notification)
 - route 404
 - initial exceeded maximum budget.
+- data page by catelog
 
 - mulitple language
 - dark mode
@@ -34,13 +35,15 @@
 
 - sentence
   - add
-  - delete(confirm dialog)
+  - delete (confirm dialog)
   - highlight text
   - speech synthesis
     - change language
 
 # CHANGE LOG
 
+- 20220216
+  1. use arrow to express expansion state and sentence2 is exist
 - 20210930
   1. change global variable to 'app.global-variable.ts'
 - 20210517

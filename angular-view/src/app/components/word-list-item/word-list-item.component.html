@@ -2,7 +2,7 @@
     <div style="padding: 0px 12px;">
         <ng-container *ngIf="getIfEditing(); else viewTempalte1">
             <div style="display: flex; ">
-                <div style="flex: auto;" class="text-width margin-custom">
+                <div style="flex: auto;" class="text-width">
                     <div style="padding: 10px 8px 0px;">
                         <mat-form-field>
                             <mat-label>Sentence/Question</mat-label>
@@ -10,7 +10,7 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="margin-custom" style="align-items: center;" [style.display]="'grid' ">
+                <div style="align-items: center;" [style.display]="'grid' ">
                     <div [@fade]>
                         <button mat-icon-button color="primary" (click)="submitEdit()">
                             <mat-icon>done</mat-icon>
@@ -33,34 +33,47 @@
         </ng-container>
 
         <ng-template #viewTempalte1>
-            <div style="display: flex; ">
-                <div style="flex: auto;" class="text-width margin-custom" (click)="expansion=!expansion">
-                    <div *ngIf="highlightTexts" style="padding: 10px 8px;">
-                        <span *ngFor="let ht of highlightTexts; let i = index" attr.index="{{i}}"
-                            [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
-                    </div>
+            <div style="display: flex;">
+                <div *ngIf="!isNullOrEmpty(word.sentence2)" style="padding: 6px 0 0 0;">
+                    <ng-container *ngIf="!expansion; else iconup">
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </ng-container>
+                    <ng-template #iconup>
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </ng-template>
                 </div>
-                <div class="margin-custom" style="align-items: center;" [style.display]="mouseHover ? 'grid' : 'none'">
-                    <div [@fade]>
-                        <button mat-icon-button color="primary" (click)="speak()">
-                            <mat-icon>volume_up</mat-icon>
-                        </button>
-                        <button mat-icon-button color="primary" (click)="highlight()">
-                            <mat-icon>highlight</mat-icon>
-                        </button>
-                        <button mat-icon-button color="primary" (click)="edit()">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                        <button mat-icon-button color="primary" (click)="delete()">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                <div style="width: 100%;">
+                    <div style="display: flex;">
+                        <div style="flex: auto;" class="text-width" (click)="expansion=!expansion">
+                            <div *ngIf="highlightTexts" style="padding: 10px 8px;">
+                                <span *ngFor="let ht of highlightTexts; let i = index" attr.index="{{i}}"
+                                    [style.backgroundColor]="(ht.hl)?'yellow':''">{{ht.text}}</span>
+                            </div>
+                        </div>
+                        <div style="align-items: center;"
+                            [style.display]="mouseHover ? 'grid' : 'none'">
+                            <div [@fade]>
+                                <button mat-icon-button color="primary" (click)="speak()">
+                                    <mat-icon>volume_up</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" (click)="highlight()">
+                                    <mat-icon>highlight</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" (click)="edit()">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" (click)="delete()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div *ngIf="expansion">
-                <mat-divider [inset]="true"></mat-divider>
-                <div style="padding: 10px 16px;">
-                    {{word.sentence2}}
+                    <div *ngIf="expansion && !isNullOrEmpty(word.sentence2)">
+                        <mat-divider [inset]="true"></mat-divider>
+                        <div style="padding: 10px 16px;">
+                            {{word.sentence2}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </ng-template>

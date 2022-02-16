@@ -164,4 +164,9 @@ export class WordListItemComponent implements DoCheck {
     this.speakEvent.emit(this.word.sentence1);
   }
 
+
+  isNullOrEmpty(str: string): boolean {
+    return !str || !str.trim();
+  }
+
 }
